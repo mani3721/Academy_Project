@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@layer utilities {
+    @variants responsive {
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+      }
+    }
+  }
+
+  /* width */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 10px;
+  
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+.hide-scroll-bar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+}
+/* .active{
+  background: white; 
+  border-radius: 9999px; 
+  color: #63b3ed;
+} */
+
+
+.perspective {
+  -webkit-perspective: 1800px;
+          perspective: 1800px;
+}
+
+.page {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform:rotateY(0deg);
+          transform:rotateY(0deg);
+}
+
+.page.turn{
+    -webkit-transform:rotateY(-180deg);
+            transform:rotateY(-180deg);
+}
+
+.front, .back {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.back {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
