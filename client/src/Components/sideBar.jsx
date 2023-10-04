@@ -38,9 +38,11 @@ const SideBar=({hidden})=>{
         })}
       </div>
 
-      <div className={`flex items-center  gap-3 px-5  ${pathname.pathname=='/category/studentlist' ? 'hidden' : 'block'}`}>
+      <div className={`flex items-center justify-center pr-6  gap-4 text-[#ff6e42] font-semibold   ${pathname.pathname=='/category/studentlist' ? 'hidden' : 'block'}`}>
+      
       <BiLogOut/>
     <button className="">LogOut</button>
+    
       </div>
 
         </section>
