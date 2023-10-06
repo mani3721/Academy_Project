@@ -133,7 +133,7 @@ const EventsListModel=({setclosemodel, datas})=>{
      {
       data.map((evnt)=>(
         <div className="flex flex-col gap-5"> 
-         <div className="flex justify-between items-center"><div className="text-white text-lg font-poppins">{evnt.batchname}</div> <div><MdDeleteOutline/></div> <div onClick={()=>navigate('/category/addbatch')} className="cursor-pointer"><AiOutlineEdit fontSize={20} color="#fff"/></div></div>
+         <div className="flex justify-between items-center"><div className="text-white text-lg font-poppins">{evnt.batchname}</div> <div className="flex gap-4 "><div><MdDeleteOutline fontSize={20} color="white" /></div> <div onClick={()=>navigate('/category/addbatch')} className="cursor-pointer"><AiOutlineEdit fontSize={20} color="#fff"/></div></div></div>
          <div className="flex gap-2"><img src={rooms} width={23} alt="" /> <h1 className="text-white font-poppins">{evnt.room}</h1></div>
          <div className="text-white text-sm font-poppins flex items-center gap-2"><PiStudentFill fontSize={17}/> <span className="">{5} Present</span>- <span className="">{0} Absent </span> / Total= < span> {15} Students </span></div>
          <div className="text-white text-sm font-poppins flex items-center gap-2"><BsFillCalendarDateFill/> {displaydate(evnt.start_date)} to {displaydate(evnt.end_date)} </div>

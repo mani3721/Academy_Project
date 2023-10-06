@@ -18,8 +18,8 @@ const EventList = ({ events, hour,currentTime,opensideBar  }) => {
             className={`p-2 flex items-center justify-center  ${isEventActive(event, currentTime) ? 'text-green-600' : ''}`}
           >
             <div className="flex items-center gap-5 ">
-             <div>
-             <img src={rooms} alt="" width={50} />
+             <div className="bg-[#d6ebec] rounded-full p-1">
+             <img src={rooms} alt="" width={35} />
              </div>
               <div>
                 <div>
