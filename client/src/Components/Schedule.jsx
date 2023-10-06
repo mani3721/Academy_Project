@@ -130,11 +130,11 @@ const year= date.getFullYear()
                     </button>
                   </div>
 
-                  <div className="flex bg-[#583bed] px-2 py-1 rounded-md text-white">
+                  <div  onClick={() => navigate("/category/addbatch")} className="flex bg-[#583bed] px-2 py-1 rounded-md text-white">
                     <div className="flex items-center gap-2 cursor-pointer">
                       <AiOutlinePlus />
                       <button
-                        onClick={() => navigate("/category/addbatch")}
+                       
                         className="font-roboto"
                       >
                         Create Batch
