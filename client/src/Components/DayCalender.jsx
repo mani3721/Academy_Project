@@ -12,9 +12,9 @@ import { BsCalendarDate } from "react-icons/bs";
 import rooms from "../assest/daymeeting.png";
 import { PiStudentFill } from "react-icons/pi";
 import { fetchAllBatch } from "../api/addbatchRequest";
-const DayCalender = ({monthIndex}) => {
+const DayCalender = ({currentDate}) => {
 
-  console.log(monthIndex,"monthIndex");
+
   const [opensidebar, setSidebar] = useState(false);
   const [openstudents, setStudents] = useState(false);
   const [events, setEvents] = useState([
@@ -207,40 +207,9 @@ const end = new Date(2023, 5, 1)
 console.log(start,end);
 console.log(monthDiff(start, end))
 
-const formatDate = (date) => {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
 
-const getTodayFormattedDate = () => {
-  const today = new Date();
-  return formatDate(today);
-};
-
-const [currentDate, setCurrentDate] = useState(getTodayFormattedDate());
-
-const changeDateByDays = (days) => {
-  const currentDateObj = new Date(currentDate);
-  currentDateObj.setDate(currentDateObj.getDate() + days);
-  setCurrentDate(formatDate(currentDateObj));
-};
   return (
     <div className="  flex max-h-[75vh] justify-between overflow-auto">
-       <button
-              className="p-2 rounded bg-blue-500 text-white"
-              onClick={() => changeDateByDays(-1)} // Move one day back
-            >
-              Previous Day
-            </button>
-            <h2 className="text-xl font-bold">{currentDate}</h2>
-            <button
-              className="p-2 rounded bg-blue-500 text-white"
-              onClick={() => changeDateByDays(1)} // Move one day forward
-            >
-              Next Day
-            </button>
       <DayTimeline openside={setOpenSidebar} events={events} currentDate={currentDate} />
       {opensidebar && (
         <motion.div

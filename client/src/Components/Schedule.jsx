@@ -39,10 +39,21 @@ const [openModel, setOpenModel]=useState(false)
   }, [monthIndex]);
 
   const today=()=>{
-     setMonthIndex(
+    
+    const date=new Date()
+const month= date.getMonth()+1
+const day= date.getDate()
+const year= date.getFullYear()
+
+let curentDate=`${year}-${month}-${day}`
+
+console.log(curentDate,"ddddddddddd");
+
+    active=='Week' ? setMonthIndex(
       monthIndex===dayjs().month() ? monthIndex+Math.random():dayjs().month()
-     )
+     ) : setCurrentDate(curentDate)
   }
+
   
   
 
@@ -73,10 +84,54 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
+
+
+
+const formatDate = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const getTodayFormattedDate = () => {
+  const today = new Date();
+  return formatDate(today);
+};
+
+const [currentDate, setCurrentDate] = useState(getTodayFormattedDate());
+
+const changeDateByDays = (days) => {
+  const currentDateObj = new Date(currentDate);
+  currentDateObj.setDate(currentDateObj.getDate() + days);
+  setCurrentDate(formatDate(currentDateObj));
+};
+
+console.log(currentDate,"currentDate1");
+
+
 const date=new Date()
 const month= date.getMonth()+1
 const day= date.getDate()
 const year= date.getFullYear()
+
+function formatDates(inputDate) {
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  const parts = inputDate.split('-');
+  const day = parseInt(parts[2], 10);
+  const month = parseInt(parts[1], 10) - 1; // JavaScript months are 0-based
+  const year = parseInt(parts[0], 10) % 100; // Get the last two digits of the year
+
+  const formattedDate = `${day} ${months[month]} ${year}`;
+
+  return formattedDate;
+}
+
+console.log(currentDate,"currebnytt");
   return (
     <>
       <AnimatedPage>
@@ -96,7 +151,7 @@ const year= date.getFullYear()
               <div className="flex justify-between w-full p-5">
                 <div>
                   <h1 className="text-[20px]  font-semibold font-poppins">
-                  {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}
+                  {active=='Week' ? dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY") :formatDates(currentDate)}
                   </h1>
                   <h1 className="font-poppins ">
                     Today is {monthNames[date.getMonth()]}, {day}th, {year}
@@ -105,11 +160,11 @@ const year= date.getFullYear()
                
                 <div className="flex gap-5 py-1">
                 <div className="flex items-center gap-3">
-                  <button onClick={()=>setMonthIndex(monthIndex-1)}><AiOutlineLeft fontSize={23}/></button>
+                  <button onClick={()=>{ active=='Week' ? setMonthIndex(monthIndex-1) : changeDateByDays(-1)}}><AiOutlineLeft fontSize={23}/></button>
                   <div onClick={today} className="cursor-pointer">
                     <h1 className="bg-[#e8ebed] p-2 rounded-md font-roboto">Today</h1>
                   </div>
-                  <button onClick={()=>setMonthIndex(monthIndex+1)}> <AiOutlineRight fontSize={23}/></button>
+                  <button onClick={()=>{ active == 'Week' ? setMonthIndex(monthIndex+1) : changeDateByDays(+1)}}> <AiOutlineRight fontSize={23}/></button>
                 </div>
                   <div className="bg-gray-200   leading-none  border-gray-200 rounded-xl p-0.5 inline-flex">
                     <button
@@ -145,7 +200,7 @@ const year= date.getFullYear()
               </div>
             </div>
             <div className="w-full  ">
-              {active =="Week" ?  <AnimatedPage> <div className=""> <Month data={dataa} month={currenMonth} getmodeldata={setgetmodeldata}/></div> </AnimatedPage>   : <AnimatedPage> <DayCalender monthIndex={monthIndex}/></AnimatedPage>  }
+              {active =="Week" ?  <AnimatedPage> <div className=""> <Month data={dataa} month={currenMonth} getmodeldata={setgetmodeldata}/></div> </AnimatedPage>   : <AnimatedPage> <DayCalender currentDate={currentDate}/></AnimatedPage>  }
             
             </div>
            </div>
