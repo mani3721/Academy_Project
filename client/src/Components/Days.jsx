@@ -85,6 +85,16 @@ console.log(validateDate(),"vvvvv");
     return days.format("DD-MM-YY") === dayjs('2023-10-15').format("DD-MM-YY") ? "line-through" : " ";
   }
 
+  function tConv24(time24) {
+    var ts = time24;
+    var H = +ts.substr(0, 2);
+    var h = (H % 12) || 12;
+    h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
+    // var ampm = H < 12 ? " AM" : " PM";     + ampm;
+    ts = h + ts.substr(2, 3) 
+    return ts;
+  };
+
   return (
     <>
       <div className=" flex shadow-sm flex-col  font-poppins min-h-[15vh]">
@@ -155,8 +165,8 @@ console.log(validateDate(),"vvvvv");
               </div>
               <div className="flex gap-2 text-sm justify-center">
                 <div className="flex">
-                  <h1 className="text-center"> {evet.start_time}</h1>-
-                  <h1 className="text-center"> {evet.end_time}</h1>
+                  <h1 className="text-center"> {tConv24(evet.start_time)}</h1>-
+                  <h1 className="text-center"> {tConv24(evet.end_time)}</h1>
                 </div>{" "}
                 *
                 <div>

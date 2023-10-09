@@ -23,7 +23,7 @@ const Schedule = () => {
   const [sendEvents, setEvents]=useState([])
   const [dataa, setDataa]=useState([])
 
-  console.log(sendEvents,"sendevents");
+  console.log(monthIndex,"monthIndex");
 
   const [events, setevents]=useState([])
 
@@ -145,7 +145,7 @@ const year= date.getFullYear()
               </div>
             </div>
             <div className="w-full  ">
-              {active =="Week" ?  <AnimatedPage> <div className=""> <Month data={dataa} month={currenMonth} getmodeldata={setgetmodeldata}/></div> </AnimatedPage>   : <AnimatedPage> <DayCalender/></AnimatedPage>  }
+              {active =="Week" ?  <AnimatedPage> <div className=""> <Month data={dataa} month={currenMonth} getmodeldata={setgetmodeldata}/></div> </AnimatedPage>   : <AnimatedPage> <DayCalender monthIndex={monthIndex}/></AnimatedPage>  }
             
             </div>
            </div>

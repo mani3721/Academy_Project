@@ -68,6 +68,24 @@ const classLiveCheck=(event)=>{
   return dayjs().isBefore(dayjs('2023-09-13')) && 'bg-blue-600' 
 }
 
+function monthDiff(d1, d2) {
+  var months;
+  months = (d2.getFullYear() - d1.getFullYear()) * 12;
+  months -= d1.getMonth()+1;
+  months += d2.getMonth();
+  return months <= 0 ? 0 : months;
+}
+
+function tConv24(time24) {
+  var ts = time24;
+  var H = +ts.substr(0, 2);
+  var h = (H % 12) || 12;
+  h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
+  // var ampm = H < 12 ? " AM" : " PM";     + ampm;
+  ts = h + ts.substr(2, 3) 
+  return ts;
+};
+
 console.log(classLiveCheck,"check");
   return (
     <>
@@ -80,7 +98,7 @@ console.log(classLiveCheck,"check");
         </div>)
            } */}
 
-          <div className="bg-[#0d817b] rounded-t-3xl h-[45vh]">
+          <div className="bg-[#0d817b] rounded-t-3xl h-[50vh]">
             <div className="p-6">
               <div className="border-b border-opacity-5 p-1 flex justify-between">
                 <div>
@@ -131,8 +149,12 @@ console.log(classLiveCheck,"check");
                       to {displaydate(evnt.end_date)}{" "}
                     </div>
                     <div className="text-white text-sm font-poppins flex items-center gap-2">
-                      <BiTimeFive fontSize={17} /> {evnt.start_time} -{" "}
-                      {evnt.end_time}
+                    <BsFillCalendarDateFill />
+                    <h1>{monthDiff(new Date(evnt.start_date), new Date(evnt.end_date))} Months</h1>
+                    </div>
+                    <div className="text-white text-sm font-poppins flex items-center gap-2">
+                      <BiTimeFive fontSize={17} /> {tConv24(evnt.start_time)} -{" "}
+                      {tConv24(evnt.end_time)}
                     </div>
 
                     <div className="flex justify-between items-center">
