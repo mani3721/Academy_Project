@@ -6,6 +6,7 @@ const DayTimeline = ({ events ,openside,currentDate }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const hours = Array.from({ length: 24 }, (_, i) => i); // Generate an array of 0 to 23
   console.log(hours);
+  
   // useEffect(() => {
   //   // Update the current time every second
   //   const intervalId = setInterval(() => {
