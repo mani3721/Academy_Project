@@ -6,9 +6,9 @@ import {
   AiOutlineDelete,
   AiOutlineEdit,
 } from "react-icons/ai";
-import { GiCrossMark } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { BsCalendarDate } from "react-icons/bs";
+import { BsCalendarDate, BsThreeDotsVertical } from "react-icons/bs";
 import rooms from "../assest/daymeeting.png";
 import { PiStudentFill } from "react-icons/pi";
 import { fetchAllBatch } from "../api/addbatchRequest";
@@ -17,6 +17,7 @@ const DayCalender = ({currentDate}) => {
 
   const [opensidebar, setSidebar] = useState(false);
   const [openstudents, setStudents] = useState(false);
+  const [openlist, setOpenList]=useState(false)
   const [events, setEvents] = useState([
     // {
     //   _id: "650bdfa3f56c32aab254663a",
@@ -178,10 +179,12 @@ const DayCalender = ({currentDate}) => {
   },[])
 
   const [sideEvents, setSideEvents]=useState([])
+  const [eventList, setEventList]=useState([])
 
   const setOpenSidebar=(value, obj)=>{
     setSidebar(value)
     setSideEvents(obj)
+    setEventList([...obj])
   }
   const displaydate = (dates) => {
     let newDate = new Date(dates);
@@ -214,14 +217,47 @@ console.log(monthDiff(start, end))
       {opensidebar && (
         <motion.div
           animate={{ x: -50 }}
-          className=" absolute right-0 bg-[#ffffff] shadow-lg border rounded-md w-[20%] h-[75vh]"
+          className={` absolute right-0  bg-[#ffffff] flex shadow-lg border rounded-md ${openlist ? 'w-[40%]' : 'w-[20%]'} h-[75vh] `}
         >
-          <div className="flex justify-between p-5">
+          {
+            openlist &&    ( <div className="bg-white border-r-2 p-2 max-h-[75vh] overflow-auto  w-full">
+
+         {
+            eventList.map((event)=>(
+              <div onClick={()=>setSideEvents([event])}  className=" cursor-pointer mt-2 rounded-md bg-[#e9f4f5]  ">
+   
+              <div  className="flex items-center justify-evenly p-2  ">
+                <div className="bg-[#d6ebec] rounded-full p-1">
+                  <img src={rooms} alt="" width={35} />
+                </div>
+                <div>
+                  <div>
+                    <h1 className="font-poppins">{event.batchname}</h1>
+                  </div>
+                  <div className="flex">
+                    <h1 className="font-poppins">
+                      {event.start_time} - {event.end_time} *
+                    </h1>
+                    <h1 className="font-poppins">{event.staffname}</h1>
+                  </div>
+                </div>
+              </div>
+          
+            </div>
+            ))
+          }
+         </div>
+       )
+          }
+      
+
+         <div className={` w-full `}>
+         <div className="flex justify-between p-5">
             <div
               className="cursor-pointer"
-              onClick={() => setOpenSidebar(false)}
+              onClick={() => {setOpenSidebar(false,eventList);setOpenList(false)}}
             >
-              <GiCrossMark color="red" />
+              <AiOutlineClose color="red" fontSize={20} />
             </div>
             <div className="flex gap-3 cursor-pointer">
               <AiOutlineEdit color="blue" fontSize={20} />
@@ -230,7 +266,7 @@ console.log(monthDiff(start, end))
           </div>
 
           <div className="flex justify-center">
-            {sideEvents.map((evt) => (
+            {sideEvents.slice(-1).map((evt) => (
               <div className=" gap-5 w-[80%] flex flex-col justify-between">
                 <div className="flex ">
                   <h1 className="font-poppins text-[20px]">{evt.batchname}</h1>
@@ -303,12 +339,15 @@ console.log(monthDiff(start, end))
                 </div>
               </div>
 
-              <div className="bg-[#4ca6a8] flex justify-center p-2 text-white rounded-md">
+              <div onClick={()=>setOpenList(!openlist)} className="bg-[#4ca6a8] flex justify-center p-2 text-white rounded-md">
                 <button>View All</button>
               </div>
               </div>
             ))}
           </div>
+         </div>
+
+
         </motion.div>
       )}
     </div>

@@ -57,7 +57,7 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
 
   function getCurrentDayClass() {
     return days.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
-      ? "text-blue-600 font-extrabold "
+      ? "bg-blue-500 text-white rounded-full px-1.5 font-extrabold "
       : "";
   }
 

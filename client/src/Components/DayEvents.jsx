@@ -63,7 +63,7 @@ console.log(eventsInHour,"eventhours");
                 <h1 className="font-poppins">
                   {event.start_time} - {event.end_time} *
                 </h1>
-                <h1 className="font-poppins">{event.staff}</h1>
+                <h1 className="font-poppins">{event.staffname}</h1>
               </div>
             </div>
             <div className="cursor-pointer">

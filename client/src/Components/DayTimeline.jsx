@@ -32,10 +32,10 @@ const DayTimeline = ({ events ,openside,currentDate }) => {
   //   return ts;
   // };
   return (
-    <div className="">
+    <div className=" h-full">
       <ul>
         {hours.map((hour) => (
-          <div key={hour} className="h-32 flex gap-4 px-5 font-poppins ">
+          <div key={hour} className=" flex gap-4 px-5 font-poppins ">
         <div className="text-[#525b68]">
         {hour.toString().padStart(2, '0')}:00 {hour>12 ? 'pm': 'am'}
         </div>
