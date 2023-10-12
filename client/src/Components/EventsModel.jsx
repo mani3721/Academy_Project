@@ -63,30 +63,29 @@ const EventsModel = ({ setclosemodel, events }) => {
     return `${date}-${month}-${year}`;
   };
   // console.log(data,"ffffffffffffffff");
-const classLiveCheck=(event)=>{
-   
-  return dayjs().isBefore(dayjs('2023-09-13')) && 'bg-blue-600' 
-}
+  const classLiveCheck = (event) => {
+    return dayjs().isBefore(dayjs("2023-09-13")) && "bg-blue-600";
+  };
 
-function monthDiff(d1, d2) {
-  var months;
-  months = (d2.getFullYear() - d1.getFullYear()) * 12;
-  months -= d1.getMonth()+1;
-  months += d2.getMonth();
-  return months <= 0 ? 0 : months;
-}
+  function monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth() + 1;
+    months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+  }
 
-function tConv24(time24) {
-  var ts = time24;
-  var H = +ts.substr(0, 2);
-  var h = (H % 12) || 12;
-  h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
-  // var ampm = H < 12 ? " AM" : " PM";     + ampm;
-  ts = h + ts.substr(2, 3) 
-  return ts;
-};
+  function tConv24(time24) {
+    var ts = time24;
+    var H = +ts.substr(0, 2);
+    var h = H % 12 || 12;
+    h = h < 10 ? "0" + h : h; // leading 0 at the left for 1 digit hours
+    // var ampm = H < 12 ? " AM" : " PM";     + ampm;
+    ts = h + ts.substr(2, 3);
+    return ts;
+  }
 
-console.log(classLiveCheck,"check");
+  console.log(classLiveCheck, "check");
   return (
     <>
       <div className="h-screen w-full  bg-gray-400 backdrop-filter backdrop-blur-sm bg-opacity-40 fixed z-50 left-0 top-0 flex justify-center items-center">
@@ -115,12 +114,10 @@ console.log(classLiveCheck,"check");
 
               <div className=" mt-2 ">
                 {eventsdata.map((evnt) => (
-                 
                   <div className="flex flex-col gap-5">
                     <div className="flex justify-between items-center">
                       <div className="text-white text-lg font-poppins">
                         {evnt.batchname}
-                       
                       </div>{" "}
                       <div className="flex gap-5">
                         <div className="cursor-pointer">
@@ -149,8 +146,14 @@ console.log(classLiveCheck,"check");
                       to {displaydate(evnt.end_date)}{" "}
                     </div>
                     <div className="text-white text-sm font-poppins flex items-center gap-2">
-                    <BsFillCalendarDateFill />
-                    <h1>{monthDiff(new Date(evnt.start_date), new Date(evnt.end_date))} Months</h1>
+                      <BsFillCalendarDateFill />
+                      <h1>
+                        {monthDiff(
+                          new Date(evnt.start_date),
+                          new Date(evnt.end_date)
+                        )}{" "}
+                        Months
+                      </h1>
                     </div>
                     <div className="text-white text-sm font-poppins flex items-center gap-2">
                       <BiTimeFive fontSize={17} /> {tConv24(evnt.start_time)} -{" "}
@@ -169,7 +172,10 @@ console.log(classLiveCheck,"check");
                         </button>
                       </div>
 
-                      <div className={`text-white ${classLiveCheck(evnt)}`}> Live </div>
+                      <div className={`text-white ${classLiveCheck(evnt)}`}>
+                        {" "}
+                        Live{" "}
+                      </div>
                     </div>
 
                     <div className=" py-3">
@@ -218,7 +224,24 @@ console.log(classLiveCheck,"check");
                     <div className="div">
                       <div className="flex gap-1 items-center">
                         <GrDocumentText />{" "}
-                        <h1 className="font-poppins">Documents</h1>
+                        <h1 className="font-poppins">Upload attachments</h1>
+                      </div>
+
+                      <div className=" flex items-center  ">
+                        <label class="w-64 flex justify-center items-center p-2 gap-3 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer ">
+                          <svg
+                            class="w-8 h-8"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                          </svg>
+                          <span class="mt-2 text-base leading-normal">
+                            Select a file
+                          </span>
+                          <input type="file" class="hidden" />
+                        </label>
                       </div>
                     </div>
                   </div>
