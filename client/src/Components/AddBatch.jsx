@@ -1,15 +1,34 @@
 import React, { useEffect, useState } from "react";
 import AnimatedPage from "../Container/Framermotion";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Select from "react-select";
 import { getAllStudentData } from "../api/StudentRequest";
-import { addbatch } from "../actions/addbatchAction";
+import { addbatch, updateBatch } from "../actions/addbatchAction";
+import { fetchbatchbyid } from "../api/addbatchRequest";
 const Addbatch = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const params= useParams()
+
+  console.log(params.id,"params");
   const [studentsList, setStudentList] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [data, setData] = useState({
+    batchname: "",
+    room: "",
+    start_date: "",
+    end_date: "",
+    start_time: "",
+    end_time: "",
+    students: "",
+    coursename: "",
+    batchtype: "",
+    staffname: "",
+    remarks: "",
+    status: "",
+  });
   const Loading = useSelector((state) => state.StudentReducer.loading);
   useEffect(() => {
     const fetcAllStudentData = async () => {
@@ -27,22 +46,48 @@ const Addbatch = () => {
     fetcAllStudentData();
   }, []);
 
+
+
   console.log(selectedOptions);
 
-  const [data, setData] = useState({
-    batchname: "",
-    room: "",
-    start_date: "",
-    end_date: "",
-    start_time: "",
-    end_time: "",
-    students: "",
-    coursename: "",
-    batchtype: "",
-    staffname: "",
-    remarks: "",
-    status: "",
-  });
+const convertdate=(data)=>{
+
+  let date = new Date(data);
+        let day = date.getDate();
+        let month = String(date.getMonth() + 1).padStart(2,'0')
+        let year = date.getFullYear();
+      
+     return `${year}-${month}-${day}`;
+}
+
+  useEffect(()=>{
+
+    const getbatch= async ()=>{
+
+      if (params.id=='add') {
+        
+      }else{
+        const {data}= await fetchbatchbyid(params.id)
+
+        
+        let startime= convertdate(data.start_date)
+
+        let endtime=convertdate(data.end_date)
+        
+    
+        setData({...data, start_date:startime, end_date:endtime})
+
+        setStudentList(data.students)
+      }
+
+
+      
+         
+    }
+
+    getbatch()
+
+  },[params.id])
 
   const [error, setError] = useState();
   const [errorMsg, setErrorMsg] = useState(false);
@@ -78,7 +123,7 @@ const Addbatch = () => {
 
   const handleSubmit = async (e) => {
     console.log(data, "dataaaa");
-
+    e.preventDefault();
     let allDates = getDatesBetween(
       new Date(data.start_date),
       new Date(data.end_date)
@@ -86,10 +131,18 @@ const Addbatch = () => {
 
     console.log(allDates, "alldatesssss");
 
-    await dispatch(addbatch({ ...data, dates: allDates })).then((res) => {
-      console.log(res);
-      res._id && navigate("/category/Schedule");
-    });
+    if (params.id=='add') {
+      await dispatch(addbatch({ ...data, dates: allDates })).then((res) => {
+        console.log(res);
+        res._id && navigate("/category/Schedule");
+      });
+    }else{
+      await dispatch(updateBatch(params.id, data)).then((res) => {
+        console.log(res,'editres');
+        res._id && navigate("/category/Schedule");
+      });
+    }
+   
   };
 
   return (
@@ -320,7 +373,7 @@ const Addbatch = () => {
               <button
                 onClick={handleSubmit}
                 type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  text-center p-4 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-8 py-3 text-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
               >
                 {Loading && (
                   <svg
@@ -341,7 +394,7 @@ const Addbatch = () => {
                     />
                   </svg>
                 )}
-                {Loading ? "Loading..." : "Create Batch"}
+                {Loading ? "Loading..." : params.id=='add' ? "Create Batch" :"Save"}
               </button>
             </div>
           </div>

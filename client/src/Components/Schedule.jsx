@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import SideBar from "./sideBar";
 import AnimatedPage from "../Container/Framermotion";
 import { AiOutlineLeft, AiOutlinePlus, AiOutlineRight } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Month from "./Months";
 import DayCalender from "./DayCalender";
 import dayjs from "dayjs";
@@ -24,6 +24,8 @@ const Schedule = () => {
   const [dataa, setDataa]=useState([])
 
   console.log(monthIndex,"monthIndex");
+
+ 
 
   const [events, setevents]=useState([])
 
@@ -185,7 +187,7 @@ console.log(currentDate,"currebnytt");
                     </button>
                   </div>
 
-                  <div  onClick={() => navigate("/category/addbatch")} className="flex bg-[#583bed] px-2 py-1 rounded-md text-white">
+                  <div  onClick={() => navigate("/category/addbatch/add")} className="flex bg-[#583bed] px-2 py-1 rounded-md text-white">
                     <div className="flex items-center gap-2 cursor-pointer">
                       <AiOutlinePlus />
                       <button

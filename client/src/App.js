@@ -45,7 +45,7 @@ function App() {
     <Route path="/category/schedule" element={<Schedule/>}/>
     <Route path="/category/Reports" element={<DateRangePicker/>}/>
     <Route path="/category/Teams" element={<Teams/>}/>
-    <Route path="/category/addbatch" element={<Addbatch/>}/>
+    <Route path="/category/addbatch/:id" element={<Addbatch/>}/>
     <Route path="*" element={<PageNotFound/>} />
   </Routes>
    </div>

@@ -11,7 +11,7 @@ import { PiStudentFill } from "react-icons/pi";
 import { GrDocumentText } from "react-icons/gr";
 import { useDispatch } from "react-redux";
 import { sendmeetinglink } from "../actions/MeetingAction";
-import { fetchbatchbyid } from "../api/addbatchRequest";
+import { deletebatch, fetchbatchbyid } from "../api/addbatchRequest";
 import loading from "../assest/loading.png";
 import { MdDeleteOutline } from "react-icons/md";
 import dayjs from "dayjs";
@@ -45,6 +45,18 @@ const EventsModel = ({ setclosemodel, events }) => {
   //   fetchbatch()
 
   // },[eventsId])
+
+  const handledeleteBatch= async (id)=>{
+    
+    setLoading(true)
+
+    id &&  await deletebatch(id).then((res)=>{
+      console.log(res, "delete");
+      setLoading(false)
+    })
+
+
+  }
 
   const sendmail = (e) => {
     e.preventDefault();
@@ -120,11 +132,17 @@ const EventsModel = ({ setclosemodel, events }) => {
                         {evnt.batchname}
                       </div>{" "}
                       <div className="flex gap-5">
-                        <div className="cursor-pointer">
-                          <MdDeleteOutline fontSize={20} color="white" />
+                        <div className="cursor-pointer" onClick={()=>handledeleteBatch(evnt._id)}>
+                        {
+                            Loading ?   <div
+                            class="inline-block  h-5 w-5 animate-spin rounded-full border-2 border-solid border-black border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                            role="status"
+                          ></div> :  <MdDeleteOutline color="white" fontSize={22}  className="" />
+                          }
+                       
                         </div>{" "}
                         <div
-                          onClick={() => navigate("/category/addbatch")}
+                          onClick={() => navigate(`/category/addbatch/${evnt._id}`)}
                           className="cursor-pointer"
                         >
                           <AiOutlineEdit fontSize={20} color="#fff" />

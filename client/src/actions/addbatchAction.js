@@ -13,3 +13,16 @@ export const addbatch=(formdata)=>async  (dispatch)=>{
     }
 
 }
+
+export const updateBatch=(id,editdata)=>async (dispatch)=>{
+
+    dispatch({type:"START"})
+    try {
+        const {data}= await addbatchApi.updatebatch(id, editdata)
+        dispatch({type:"SCUCCESS",data:data})
+        return data
+    } catch (error) {
+        dispatch({type:"FAIL"})
+        return error
+    }
+}
