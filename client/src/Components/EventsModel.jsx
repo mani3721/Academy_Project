@@ -15,7 +15,7 @@ import { deletebatch, fetchbatchbyid } from "../api/addbatchRequest";
 import loading from "../assest/loading.png";
 import { MdDeleteOutline } from "react-icons/md";
 import dayjs from "dayjs";
-const EventsModel = ({ setclosemodel, events }) => {
+const EventsModel = ({ setclosemodel, events,setGetCall }) => {
   console.log(events, "events");
 
   const navigate = useNavigate();
@@ -53,6 +53,7 @@ const EventsModel = ({ setclosemodel, events }) => {
     id &&  await deletebatch(id).then((res)=>{
       console.log(res, "delete");
       setLoading(false)
+      setGetCall(res)
     })
 
 
@@ -135,7 +136,7 @@ const EventsModel = ({ setclosemodel, events }) => {
                         <div className="cursor-pointer" onClick={()=>handledeleteBatch(evnt._id)}>
                         {
                             Loading ?   <div
-                            class="inline-block  h-5 w-5 animate-spin rounded-full border-2 border-solid border-black border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                            class="inline-block  h-5 w-5 animate-spin rounded-full border-2 border-solid border-white border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
                             role="status"
                           ></div> :  <MdDeleteOutline color="white" fontSize={22}  className="" />
                           }

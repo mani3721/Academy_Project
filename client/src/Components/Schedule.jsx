@@ -17,7 +17,7 @@ const Schedule = () => {
   const navigate = useNavigate();
   const [active, setActive] = useState("Week");
   const [currenMonth, setCurrentMonth] = useState(getMonth());
-
+  const [getCall, setGetCalls]=useState('')
   const [monthIndex, setMonthIndex]=useState(dayjs().month())
 
   const [sendEvents, setEvents]=useState([])
@@ -67,9 +67,11 @@ console.log(curentDate,"ddddddddddd");
       const {data}= await fetchAllBatch()
 
       setDataa(data)
+
+      setOpenModel(false)
     }
     fetchdatas()
-  },[])
+  },[getCall])
   
 
   const time = new Date().getHours();
@@ -144,7 +146,7 @@ console.log(currentDate,"currebnytt");
              
           </div>
           <div className="flex">
-                 {openModel && <EventsModel events={events}  setclosemodel={()=>setOpenModel(false)}/>}
+                 {openModel && <EventsModel events={events} setGetCall={(e)=>setGetCalls(e)}  setclosemodel={()=>setOpenModel(false)}/>}
             <div className="py-8">
               <SideBar />
             </div>
@@ -202,7 +204,7 @@ console.log(currentDate,"currebnytt");
               </div>
             </div>
             <div className="w-full  ">
-              {active =="Week" ?  <AnimatedPage> <div className=""> <Month data={dataa} month={currenMonth} getmodeldata={setgetmodeldata}/></div> </AnimatedPage>   : <AnimatedPage> <DayCalender currentDate={currentDate}/></AnimatedPage>  }
+              {active =="Week" ?  <AnimatedPage> <div className=""> <Month data={dataa} month={currenMonth} getmodeldata={setgetmodeldata}/></div> </AnimatedPage>   : <AnimatedPage> <DayCalender currentDate={currentDate} setGetCall={(e)=>setGetCalls(e)}/></AnimatedPage>  }
             
             </div>
            </div>

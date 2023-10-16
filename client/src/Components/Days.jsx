@@ -12,9 +12,6 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
   const [data, setData] = useState([]);
   const [openlist, setOpenList] = useState(false);
 
-
-  
-
   let currentDate;
   const date = new Date();
 
@@ -49,7 +46,6 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
       });
 
       setData(events);
-      
     };
 
     fetchbatch();
@@ -60,40 +56,72 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
       ? "bg-blue-500 text-white rounded-full px-1.5 font-extrabold "
       : "";
   }
+  function getPreviousDay() {
+    const currentDate = dayjs();
+    const previousDate = currentDate.subtract(1, 'day');
+  
+    return currentDate.format("DD-MM-YY") === previousDate.format("DD-MM-YY")
+      ? "bg-blue-500 text-white rounded-full px-1.5 font-extrabold "
+      : "";
+  }
 
   function validateDate() {
-    let pickedDate = Date.parse("06-10-2023".replace(/-/g, " "));
+
+    let pickedDate = Date.parse("01-10-2023".replace(/-/g, " "));
     let todaysDate = new Date();
     todaysDate.setHours(0, 0, 0, 0);
     let dateDifference = Math.abs(Number(todaysDate) - pickedDate);
     //7 Days=60480000s0ms
 
-    console.log(dateDifference,"dateeeee");
-    if (dateDifference > 604800000) {
-        return "";
-    } else {
-        return "line-through";
-    }
-}
-
-console.log(validateDate(),"vvvvv");
-
-  function checkDate(){
     
+    if (dateDifference > 604800000) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+  function isDateMoreThan7DaysAgo(dateString) {
+    // Convert the given date string to a Date object
+    const pickedDate = new Date(dateString);
+    const todaysDate = new Date();
+    
+    // Set the time to midnight for both dates to ignore the time part
+    pickedDate.setHours(0, 0, 0, 0);
+    todaysDate.setHours(0, 0, 0, 0);
+    
+    // Calculate the time difference in milliseconds
+    const dateDifference = Math.abs(todaysDate - pickedDate);
+  
+    // 7 days in milliseconds
+    const sevenDaysInMillis = 7 * 24 * 60 * 60 * 1000;
+  
+    return dateDifference > sevenDaysInMillis;
+  }
+  
+  // Example usage
+  // const dateToCheck = "10-10-2023";
+  // const result = isDateMoreThan7DaysAgo(dateToCheck);
+  // console.log(result,"datesssssssssssssssssssssssssssss"); 
 
 
-    return days.format("DD-MM-YY") === dayjs('2023-10-15').format("DD-MM-YY") ? "line-through" : " ";
+  console.log(validateDate(), "vvvvv");
+
+  function checkDate() {
+    return days.format("DD-MM-YY") === dayjs("2023-10-15").format("DD-MM-YY")
+      ? "line-through"
+      : " ";
   }
 
   function tConv24(time24) {
     var ts = time24;
     var H = +ts.substr(0, 2);
-    var h = (H % 12) || 12;
-    h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
+    var h = H % 12 || 12;
+    h = h < 10 ? "0" + h : h; // leading 0 at the left for 1 digit hours
     // var ampm = H < 12 ? " AM" : " PM";     + ampm;
-    ts = h + ts.substr(2, 3) 
+    ts = h + ts.substr(2, 3);
     return ts;
-  };
+  }
 
   return (
     <>
@@ -131,7 +159,7 @@ console.log(validateDate(),"vvvvv");
         )}
 
         <div
-          className={`max-h-16 ${validateDate() }   flex-col gap-2 items-center flex justify-center cursor-pointer `}
+          className={`max-h-16    flex-col gap-2 items-center flex justify-center cursor-pointer `}
         >
           {data.slice(-1).map((evet, idx) => (
             <div
@@ -140,9 +168,8 @@ console.log(validateDate(),"vvvvv");
                 ["Sat", "Sun"].includes(days.format("ddd"))
                   ? "bg-[#fdeeea] border-[#f29980] border-l-4  text-[#ee734f]"
                   : "border-l-4 border-[#24bcc9]"
-              } w-[90%] bg-[#e9f4f5]  text-[#379a9c]  `}
+              } w-[90%] bg-[#e9f4f5] ${isDateMoreThan7DaysAgo('20-10-2023')? 'line-through' :" "} text-[#379a9c]  `}
             >
-           
               {data.length > 1 && (
                 <span
                   onClick={(e) => {

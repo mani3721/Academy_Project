@@ -11,10 +11,11 @@ import { motion } from "framer-motion";
 import { BsCalendarDate, BsThreeDotsVertical } from "react-icons/bs";
 import rooms from "../assest/daymeeting.png";
 import { PiStudentFill } from "react-icons/pi";
-import { fetchAllBatch } from "../api/addbatchRequest";
-const DayCalender = ({currentDate}) => {
+import { deletebatch, fetchAllBatch } from "../api/addbatchRequest";
+import { useNavigate } from "react-router-dom";
+const DayCalender = ({currentDate,setGetCall}) => {
 
-
+  const navigate = useNavigate()
   const [opensidebar, setSidebar] = useState(false);
   const [openstudents, setStudents] = useState(false);
   const [openlist, setOpenList]=useState(false)
@@ -168,6 +169,10 @@ const DayCalender = ({currentDate}) => {
     // { id: 3, title: 'Meeting 2', date: '2023-09-07', startTime: '15:00', endTime: '16:00' },
   ]);
 
+  const [getCall, setGetCalls]=useState('')
+
+  const [Loading, setLoading] = useState(false);
+
   useEffect(()=>{
     const fetchdatas=async()=>{
 
@@ -176,11 +181,12 @@ const DayCalender = ({currentDate}) => {
       setEvents(data)
     }
     fetchdatas()
-  },[])
+  },[getCall])
 
   const [sideEvents, setSideEvents]=useState([])
   const [eventList, setEventList]=useState([])
 
+  console.log(eventList,"eventlist");
   const setOpenSidebar=(value, obj)=>{
     setSidebar(value)
     setSideEvents(obj)
@@ -209,6 +215,20 @@ const end = new Date(2023, 5, 1)
 
 console.log(start,end);
 console.log(monthDiff(start, end))
+
+const handledeleteBatch= async (id)=>{
+    
+  setLoading(true)
+
+  id &&  await deletebatch(id).then((res)=>{
+    setLoading(false)
+    setGetCalls(res)
+    setGetCall(res)
+    setSidebar(false)
+  })
+
+
+}
 
 
   return (
@@ -260,8 +280,16 @@ console.log(monthDiff(start, end))
               <AiOutlineClose color="red" fontSize={20} />
             </div>
             <div className="flex gap-3 cursor-pointer">
-              <AiOutlineEdit color="blue" fontSize={20} />
-              <AiOutlineDelete color="red" fontSize={20} />
+              <AiOutlineEdit color="blue" fontSize={20}  onClick={() => navigate(`/category/addbatch/${eventList[0]._id}`)}  />
+              {
+                            Loading ?   <div
+                            class="inline-block  h-5 w-5 animate-spin rounded-full border-2 border-solid border-black border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                            role="status"
+                          ></div> :   <AiOutlineDelete color="red" fontSize={20}  onClick={()=>handledeleteBatch(eventList[0]._id)} />
+              }
+                       
+             
+              
             </div>
           </div>
 
