@@ -30,7 +30,7 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
       //  const {data}= await fetchAllBatch()
 
       //  console.log(data,"dataaaaaa");
-
+      const currentDates = new Date();
       const events = datas.filter((evt) => {
         for (const evtDate of evt.dates) {
           const formatDate = dayjs(evtDate, "YYYY-MM-DD").format("DD-MM-YY");
@@ -40,9 +40,16 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
             const formattedEvtDate = dayjs(evtDate, "YYYY-MM-DD").format(
               "DD-MM-YY"
             );
+
+            const isBeforeCurrentDate = dayjs(evtDate).isBefore(currentDates);
+            const result = isBeforeCurrentDate ? 'line-through' : '';
             
-            return formattedEvtDate;
+            evt.completed = result;
+
+            return evt;
           }
+
+
         }
       });
  
@@ -91,13 +98,29 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
    
    let result;
 
-   event.dates.map((date)=>{
-    if (dayjs(date).isBefore(currentDates)) {
-      console.log(date,"dateString");
-      let result= days.format("DD-MM-YYYY") === dayjs(date).format("DD-MM-YYYY") ? 'line-through' :""
+   for (const evtDate of event.dates) {
 
-     }
-   })
+    if (dayjs(evtDate).isBefore(currentDates)) { 
+      console.log(evtDate,"dateString");
+
+      let result= days.format("DD-MM-YY") === dayjs(evtDate).format("DD-MM-YY") ? 'line-through' :""
+
+      console.log(result,"resuttttttttt");
+    }
+   
+  }
+
+  //  event.dates.map((date)=>{
+  //   if (dayjs(date).isBefore(currentDates)) {
+  //     console.log(date,"dateString");
+
+      
+     
+          
+
+  //     console.log(result,"resultttttttttttt");
+  //    }
+ 
 
     // data.map((datastring)=>{
     //   datastring.dates.forEach(dateString => {
@@ -106,9 +129,7 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
     // })
 
     
-    console.log(result,"resuktttttttt");
-
-    return result
+   
 
   };
 
@@ -190,7 +211,7 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
                 ["Sat", "Sun"].includes(days.format("ddd"))
                   ? "bg-[#fdeeea] border-[#f29980] border-l-4  text-[#ee734f]"
                   : "border-l-4 border-[#24bcc9]"
-              } w-[90%] bg-[#e9f4f5]  text-[#379a9c]   ${checkdatesss(evet)}   `}
+              } w-[90%] bg-[#e9f4f5]  text-[#379a9c]   ${evet.completed}   `}
             >
 
               {console.log(evet,"evet")}
