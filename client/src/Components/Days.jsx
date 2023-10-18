@@ -4,6 +4,7 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { fetchAllBatch } from "../api/addbatchRequest";
 import EventsListModel from "./EventsListModel";
 import { SiBlockchaindotcom } from "react-icons/si";
+import {SlBadge}  from 'react-icons/sl'
 
 const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
 
@@ -200,7 +201,8 @@ const checkdatesss = (event) => {
                 </span>
               )}
 
-              <div>
+              <div className="flex items-center justify-evenly">
+                {/* <SlBadge color="blue"/> */}
                 <h1 className="text-center text-sm">
                   {" "}
                   {`${evet.batchname.slice(0, 20)}`}

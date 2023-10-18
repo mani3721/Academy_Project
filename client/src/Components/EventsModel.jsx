@@ -80,13 +80,15 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
     return dayjs().isBefore(dayjs("2023-09-13")) && "bg-blue-600";
   };
 
-  function monthDiff(d1, d2) {
-    var months;
-    months = (d2.getFullYear() - d1.getFullYear()) * 12;
-    months -= d1.getMonth() + 1;
-    months += d2.getMonth();
-    return months <= 0 ? 0 : months;
+
+  function differenceInMonths(date1, date2) {
+    const monthDiff = date1.getMonth() - date2.getMonth();
+    const yearDiff = date1.getYear() - date2.getYear();
+  
+    return monthDiff + yearDiff * 12;
   }
+  
+
 
   function tConv24(time24) {
     var ts = time24;
@@ -167,10 +169,7 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
                     <div className="text-white text-sm font-poppins flex items-center gap-2">
                       <BsFillCalendarDateFill />
                       <h1>
-                        {monthDiff(
-                          new Date(evnt.start_date),
-                          new Date(evnt.end_date)
-                        )}{" "}
+                        {differenceInMonths(new Date(evnt.end_date), new Date(evnt.start_date)  )} {" "}
                         Months
                       </h1>
                     </div>
