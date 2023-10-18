@@ -13,6 +13,7 @@ import { deleteStaffData, getAllStaffData } from "../api/StaffRequest";
 import { AiOutlinePrinter } from "react-icons/ai";
 import { BsFillCloudDownloadFill } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
+import {HiMiniCheckBadge} from 'react-icons/hi2'
 
 const Staff = () => {
   const navigate = useNavigate();
@@ -148,10 +149,11 @@ const Staff = () => {
                           />
                         </div>
                         <div>
-                          <div>
+                          <div className="flex items-center justify-between">
                             <h3 class="text-center text-xl text-gray-900 font-medium leading-8">
                               {staff.name.split(/\s+/)[0]}
                             </h3>
+                            <HiMiniCheckBadge color="blue"/>
                           </div>
                           <div class="text-center text-gray-400 text-xs font-semibold">
                             <p>{staff.role}</p>

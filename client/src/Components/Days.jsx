@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { fetchAllBatch } from "../api/addbatchRequest";
 import EventsListModel from "./EventsListModel";
+import { SiBlockchaindotcom } from "react-icons/si";
 
 const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
 
@@ -38,12 +39,8 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
               "DD-MM-YY"
             );
 
-            const isBeforeCurrentDate = dayjs(evtDate).isBefore(currentDates);
-            const result = isBeforeCurrentDate ? "line-through" : "";
-
-            evt.completed = result;
-
-            return evt;
+           
+            return formattedEvtDate;
           }
         }
       });
@@ -84,29 +81,27 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
     }
   }
 
-  const dates = ["2023-10-03", "2023-10-04", "2023-10-27", "2023-10-25"];
+  const dates = ["2023-10-03", "2023-10-05", "2023-10-27", "2023-10-25"];
 
-  const checkdatesss = (event) => {
-   
-    const currentDates = new Date();
+const checkdatesss = (event) => {
+  const currentDates = dayjs(); // Get the current date using dayjs
+  const results = {};
 
-    let result;
-
-    for (const evtDate of event.dates) {
-      if (dayjs(evtDate).isBefore(currentDates)) {
-     
-
-        let result =
-          days.format("DD-MM-YY") === dayjs(evtDate).format("DD-MM-YY")
-            ? "line-through"
-            : "";
-
-       
-      }
+  for (const evtDate of event) {
+    const formattedDate = dayjs(evtDate).format("DD-MM-YY");
+    if (dayjs(evtDate).isBefore(currentDates)) {
+      results[formattedDate]="line-through"
+    } else {
+      results[formattedDate]='future'
     }
+  }
 
+  return results;
+};
 
-  };
+// delete checkdatesss(dates)[dayjs().format("DD-MM-YY")]
+
+// console.log(checkdatesss(dates)[days.format("DD-MM-YY")], "checkdatesss");
 
   function isDateMoreThan7DaysAgo(dateString) {
     // Convert the given date string to a Date object
@@ -178,12 +173,19 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
             <div
               onClick={() => setGetmodeldata(evet, true)}
               className={`${
-                ["Sat", "Sun"].includes(days.format("ddd"))
-                  ? "bg-[#fdeeea] border-[#f29980] border-l-4  text-[#ee734f]"
-                  : "border-l-4 border-[#24bcc9]"
-              } w-[90%] bg-[#e9f4f5]  text-[#379a9c]   ${evet.completed}   `}
+                ["Sat", "Sun"].includes(days.format("ddd")) ? "bg-[#fdeeea] border-[#f29980] border-l-4  text-[#ee734f]" : "border-l-4 border-[#24bcc9]"
+              } w-[90%] bg-[#e9f4f5] shadow-md  text-[#379a9c]   ${checkdatesss(evet.dates)[days.format("DD-MM-YY")] }   `}
             >
-           
+
+              {/* {
+                <div className="relative right-4 bottom-1"> 
+                     <span title="Present" class="relative flex h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                        </span>
+                </div>
+              }
+            */}
               {data.length > 1 && (
                 <span
                   onClick={(e) => {
@@ -204,12 +206,12 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
                   {`${evet.batchname.slice(0, 20)}`}
                 </h1>
               </div>
-              <div className="flex gap-2 text-sm justify-center">
+              <div className="flex gap-2 text-sm items-center justify-center">
                 <div className="flex">
                   <h1 className="text-center"> {tConv24(evet.start_time)}</h1>-
                   <h1 className="text-center"> {tConv24(evet.end_time)}</h1>
                 </div>{" "}
-                *
+                <SiBlockchaindotcom fontSize={10}/>
                 <div>
                   <h1 className="text-center text-sm"> {evet.staffname}</h1>
                 </div>
