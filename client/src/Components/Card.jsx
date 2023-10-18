@@ -31,7 +31,7 @@ const Card = ({ item, handleChange, activeTab, setCall,loading }) => {
     setLoading(true);
     setActive("delete");
     await deleteCourses(id).then((res) => {
-      console.log(res);
+
       setCall(res);
       setLoading(false);
     });
@@ -41,7 +41,7 @@ const Card = ({ item, handleChange, activeTab, setCall,loading }) => {
     setActive("draft");
     setLoading(true);
     await draftCourses(id).then((res) => {
-      console.log(res);
+
       setCall(res);
       // setLoading(false);
       setopenDrapDown(false);

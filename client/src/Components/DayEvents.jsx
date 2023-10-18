@@ -3,7 +3,7 @@ import rooms from "../assest/daymeeting.png";
 import { RiUserVoiceFill } from "react-icons/ri";
 const EventList = ({ events, hour, currentTime, opensideBar }) => {
 
-  console.log(events,"eventlist");
+
 
   // const eventsInHour = events.filter((event) => {
   //   const startHour = parseInt(event.start_time.split(":")[0]);
@@ -26,9 +26,7 @@ const EventList = ({ events, hour, currentTime, opensideBar }) => {
  
 
   
-  
 
-console.log(eventsInHour,"eventhours");
  
   return (
     <div

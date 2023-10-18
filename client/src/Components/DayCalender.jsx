@@ -186,7 +186,7 @@ const DayCalender = ({currentDate,setGetCall}) => {
   const [sideEvents, setSideEvents]=useState([])
   const [eventList, setEventList]=useState([])
 
-  console.log(eventList,"eventlist");
+
   const setOpenSidebar=(value, obj)=>{
     setSidebar(value)
     setSideEvents(obj)
@@ -213,8 +213,8 @@ const DayCalender = ({currentDate,setGetCall}) => {
 const start = new Date(2023, 1, 1)
 const end = new Date(2023, 5, 1)
 
-console.log(start,end);
-console.log(monthDiff(start, end))
+
+
 
 const handledeleteBatch= async (id)=>{
     

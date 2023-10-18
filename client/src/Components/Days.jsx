@@ -5,9 +5,6 @@ import { fetchAllBatch } from "../api/addbatchRequest";
 import EventsListModel from "./EventsListModel";
 
 const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
-  // console.log(datas,"monthssss");
-  //  console.log(days.format("DD-MM-YY"),"days");
-  //  console.log(days.format("DD-MM") < dayjs().format("DD-MM"),"dayjsssss");
 
   const [data, setData] = useState([]);
   const [openlist, setOpenList] = useState(false);
@@ -21,7 +18,7 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
 
   // This arrangement can be altered based on how we want the date's format to appear.
   currentDate = `${day}-${month}-${year}`;
-  console.log(currentDate);
+
 
   // var middate = new Date((startdate.getTime() + enddate.getTime()) / 2);
 
@@ -29,12 +26,12 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
     const fetchbatch = async () => {
       //  const {data}= await fetchAllBatch()
 
-      //  console.log(data,"dataaaaaa");
+    
       const currentDates = new Date();
       const events = datas.filter((evt) => {
         for (const evtDate of evt.dates) {
           const formatDate = dayjs(evtDate, "YYYY-MM-DD").format("DD-MM-YY");
-          //  console.log(formatDate,"formatDate");
+       
 
           if (formatDate === days.format("DD-MM-YY")) {
             const formattedEvtDate = dayjs(evtDate, "YYYY-MM-DD").format(
@@ -42,18 +39,16 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
             );
 
             const isBeforeCurrentDate = dayjs(evtDate).isBefore(currentDates);
-            const result = isBeforeCurrentDate ? 'line-through' : '';
-            
+            const result = isBeforeCurrentDate ? "line-through" : "";
+
             evt.completed = result;
 
             return evt;
           }
-
-
         }
       });
- 
-      console.log(events,"ecents");
+
+   
 
       setData(events);
     };
@@ -89,51 +84,29 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
     }
   }
 
-
   const dates = ["2023-10-03", "2023-10-04", "2023-10-27", "2023-10-25"];
 
   const checkdatesss = (event) => {
-    console.log(event,"eveteeee");
+   
     const currentDates = new Date();
-   
-   let result;
 
-   for (const evtDate of event.dates) {
+    let result;
 
-    if (dayjs(evtDate).isBefore(currentDates)) { 
-      console.log(evtDate,"dateString");
-
-      let result= days.format("DD-MM-YY") === dayjs(evtDate).format("DD-MM-YY") ? 'line-through' :""
-
-      console.log(result,"resuttttttttt");
-    }
-   
-  }
-
-  //  event.dates.map((date)=>{
-  //   if (dayjs(date).isBefore(currentDates)) {
-  //     console.log(date,"dateString");
-
-      
+    for (const evtDate of event.dates) {
+      if (dayjs(evtDate).isBefore(currentDates)) {
      
-          
 
-  //     console.log(result,"resultttttttttttt");
-  //    }
- 
+        let result =
+          days.format("DD-MM-YY") === dayjs(evtDate).format("DD-MM-YY")
+            ? "line-through"
+            : "";
 
-    // data.map((datastring)=>{
-    //   datastring.dates.forEach(dateString => {
-      
-    // });
-    // })
+       
+      }
+    }
 
-    
-   
 
   };
-
-
 
   function isDateMoreThan7DaysAgo(dateString) {
     // Convert the given date string to a Date object
@@ -152,9 +125,6 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
 
     return dateDifference > sevenDaysInMillis;
   }
-
-
-
 
   function tConv24(time24) {
     var ts = time24;
@@ -213,8 +183,7 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
                   : "border-l-4 border-[#24bcc9]"
               } w-[90%] bg-[#e9f4f5]  text-[#379a9c]   ${evet.completed}   `}
             >
-
-              {console.log(evet,"evet")}
+           
               {data.length > 1 && (
                 <span
                   onClick={(e) => {

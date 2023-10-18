@@ -47,7 +47,7 @@ const EventsListModel = ({ setclosemodel, datas }) => {
     e.preventDefault();
 
     dispatch(sendmeetinglink(meetingLink)).then((res) => {
-      console.log(res, "sendail");
+     
     });
   };
 
@@ -59,7 +59,7 @@ const EventsListModel = ({ setclosemodel, datas }) => {
     return months <= 0 ? 0 : months;
 }
 
-  // console.log(data,"ffffffffffffffff");
+  
 
   function tConv24(time24) {
     var ts = time24;
@@ -101,7 +101,7 @@ const EventsListModel = ({ setclosemodel, datas }) => {
                     }}
                     className={` w-[90%] bg-[#e9f4f5] text-[#379a9c] rounded-md`}
                   >
-                    {console.log(evet, "lenth")}
+                  
                     {data.length > 1 && (
                       <span className="relative inline-block float-right">
                         <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-[#4338ca] rounded-r-full rounded-l-full">

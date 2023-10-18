@@ -25,7 +25,7 @@ const StudentSignIn=()=>{
     const handleSubmit=(e)=>{
       e.preventDefault()
       data.name&& data.email&& data.email && dispatch(signUp(data)).then((res)=>{
-        console.log(res,"create account");
+      
            navigate('/category/studentlist')
          
        })

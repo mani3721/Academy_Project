@@ -79,11 +79,11 @@ export const updatestudentData=async(req, res)=>{
     _id,
   } = req.body;
 
-  console.log(req.body);
+
 
   try {
     const student = await StudentModel.findById(studentId);
-    console.log(student,"student");
+   
     if (student.id === _id) {
       await student.updateOne({ $set: req.body });
       res.status(200).json(student);

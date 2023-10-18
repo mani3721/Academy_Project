@@ -23,13 +23,13 @@ const Schedule = () => {
   const [sendEvents, setEvents]=useState([])
   const [dataa, setDataa]=useState([])
 
-  console.log(monthIndex,"monthIndex");
+ 
 
  
 
   const [events, setevents]=useState([])
 
-  // console.log(id,"idddddddddddddddddd");
+
 const [openModel, setOpenModel]=useState(false)
   const setgetmodeldata=(data, active)=>{
     setevents(data)
@@ -49,7 +49,6 @@ const year= date.getFullYear()
 
 let curentDate=`${year}-${month}-${day}`
 
-console.log(curentDate,"ddddddddddd");
 
     active=='Week' ? setMonthIndex(
       monthIndex===dayjs().month() ? monthIndex+Math.random():dayjs().month()
@@ -60,7 +59,6 @@ console.log(curentDate,"ddddddddddd");
   
 
 
-  // console.log(data,"dddddddddddd");
   useEffect(()=>{
     const fetchdatas=async()=>{
 
@@ -111,7 +109,7 @@ const changeDateByDays = (days) => {
   setCurrentDate(formatDate(currentDateObj));
 };
 
-console.log(currentDate,"currentDate1");
+
 
 
 const date=new Date()
@@ -135,7 +133,7 @@ function formatDates(inputDate) {
   return formattedDate;
 }
 
-console.log(currentDate,"currebnytt");
+
   return (
     <>
       <AnimatedPage>

@@ -3,7 +3,7 @@ import CalenderModel from "../Models/calenderModel.js";
 //insert events
 export const Calender = async (req, res) => {
 
-    console.log(req.body);
+  
 
   const calenderData = new CalenderModel(req.body);
 

@@ -10,7 +10,7 @@ const SideBar=({hidden})=>{
       };
 
       const pathname= useLocation()
-      console.log(pathname.pathname);
+  
     return (
         <>
           <section className='custom-scrollbar  flex w-fit flex-col justify-between  border-r border-r-dark-4 bg-dark-2  max-md:hidden '>

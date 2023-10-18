@@ -10,7 +10,7 @@ const Week =(props)=>{
     let select = props.select;
     let monthEvents = props.monthEvents;
 
-console.log(currentMonthView,"currentMonthView");
+
 
     for (var i = 0; i < 7; i++) {
       var dayHasEvents = false;

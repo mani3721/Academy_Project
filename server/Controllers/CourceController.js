@@ -85,11 +85,9 @@ export const editcourcedata= async (req, res)=>{
     const courseid = req.params.id;
     const {_id} = req.body;
 
-    console.log(req.body,"bodyyy");
     try {
         let coursesdata= await courcemodel.findById(courseid)
 
-        console.log(coursesdata.id,_id,"courec");
 
         if (coursesdata.id==_id) {
 

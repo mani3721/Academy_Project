@@ -14,7 +14,7 @@ const AddCources = () => {
 
  const params= useParams()
 
- console.log(params.id,"params");
+
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const AddCources = () => {
 
   let currentDate = `${day} ${month} ${year}`;
 
-  // console.log(currentDate);
+
 
   const convertBase64=(e)=>{
 
@@ -92,13 +92,13 @@ const AddCources = () => {
   
   const handleSubmit = (e,id) => {
     setId(id)
-    console.log(data,"data");
+   
     e.preventDefault();
-    console.log(data);
+    
     if (params.id=='add') {
       if (data.title && data.category && data.date ) {
         dispatch(addcource({...data, activeTap:id})).then((res) => {
-          console.log(res);
+      
           res._id ? navigate("/category/cources") : setError(res);
         });
       } else {
@@ -108,7 +108,7 @@ const AddCources = () => {
     }else{
       if (data.title && data.category && data.date ) {
       dispatch(editcource(params.id, data)).then((res)=>{
-        console.log(res,"ressss");
+    
         res._id && navigate('/category/cources')
        })
       }

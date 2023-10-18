@@ -20,11 +20,11 @@ const AddStudentDetails = () => {
   const dispatch = useDispatch();
   const Loading = useSelector((state) => state.StudentReducer.loading);
 
-  console.log(Loading);
+
 
   const params = useParams();
 
-  console.log(params.id,"iddddddddddddddd");
+
 
   const [data, setData] = useState(initialState);
   const [errorMsg, setErrorMsg] = useState(false);
@@ -48,7 +48,7 @@ const AddStudentDetails = () => {
 
       if (params.id=="Add") {
         dispatch(StudentData(data)).then((res) => {
-          console.log(res);
+    
         if (res._id) {
           navigate("/category/studentlist");
         }else if(res.response.status){
@@ -89,7 +89,7 @@ const AddStudentDetails = () => {
         const {data}= await getOneStudent(params.id)
   
           setData(data)
-          console.log(data,"dddddddddddddddddddddddddddddddd");
+         
       }
       fetcOneStudentData()
     }

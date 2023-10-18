@@ -16,7 +16,7 @@ import loading from "../assest/loading.png";
 import { MdDeleteOutline } from "react-icons/md";
 import dayjs from "dayjs";
 const EventsModel = ({ setclosemodel, events,setGetCall }) => {
-  console.log(events, "events");
+
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
   );
   const [Loading, setLoading] = useState(false);
 
-  console.log(meetingLink, "meeting");
+
   // const [data, setData]=useState([])
 
   // const eventsdata = events ?? [];
@@ -63,7 +63,7 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
     e.preventDefault();
 
     dispatch(sendmeetinglink(meetingLink)).then((res) => {
-      console.log(res, "sendail");
+   
     });
   };
   const displaydate = (dates) => {
@@ -75,7 +75,7 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
 
     return `${date}-${month}-${year}`;
   };
-  // console.log(data,"ffffffffffffffff");
+ 
   const classLiveCheck = (event) => {
     return dayjs().isBefore(dayjs("2023-09-13")) && "bg-blue-600";
   };

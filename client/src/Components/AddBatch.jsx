@@ -12,7 +12,7 @@ const Addbatch = () => {
 
   const params= useParams()
 
-  console.log(params.id,"params");
+
   const [studentsList, setStudentList] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [data, setData] = useState({
@@ -34,7 +34,6 @@ const Addbatch = () => {
     const fetcAllStudentData = async () => {
       const { data } = await getAllStudentData();
 
-      console.log(data, "data");
       let studentsdata = [];
       data.map((list) => {
         studentsdata.push({ value: list._id, label: list.name });
@@ -48,7 +47,7 @@ const Addbatch = () => {
 
 
 
-  console.log(selectedOptions);
+
 
 const convertdate=(data)=>{
 
@@ -122,23 +121,23 @@ const convertdate=(data)=>{
   }
 
   const handleSubmit = async (e) => {
-    console.log(data, "dataaaa");
+   
     e.preventDefault();
     let allDates = getDatesBetween(
       new Date(data.start_date),
       new Date(data.end_date)
     );
 
-    console.log(allDates, "alldatesssss");
+   
 
     if (params.id=='add') {
       await dispatch(addbatch({ ...data, dates: allDates })).then((res) => {
-        console.log(res);
+  
         res._id && navigate("/category/Schedule");
       });
     }else{
       await dispatch(updateBatch(params.id, data)).then((res) => {
-        console.log(res,'editres');
+      
         res._id && navigate("/category/Schedule");
       });
     }

@@ -12,11 +12,11 @@ const AddStaff = () => {
   const dispatch = useDispatch();
   const Loading = useSelector((state) => state.StudentReducer.loading);
 
-  console.log(Loading);
+
 
   const params = useParams();
 
-  console.log(params.id,"iddddddddddddddd");
+ 
 
   const [data, setData] = useState({
     name:"",
@@ -46,7 +46,7 @@ const AddStaff = () => {
      })
   }else{
     dispatch(updateStaff(params.id, data)).then((res)=>{
-       console.log(res);
+   
        res._id ? navigate('/category/staff') : navigate('/addstaff/add')
        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
      })
@@ -64,7 +64,7 @@ useEffect(()=>{
 
     setData(data)
  
-    console.log(data,"data");
+  
   }
    
  }

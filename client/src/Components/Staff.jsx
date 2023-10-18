@@ -44,7 +44,7 @@ const Staff = () => {
     setId(id);
     setLoading(true);
     await deleteStaffData(id).then((res) => {
-      console.log(res);
+    
       setGetCall(res);
     });
   };

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const StudentLogin = () => {
   const Loading = useSelector((state) => state.StudentReducer.loading);
 
-  console.log(Loading);
+
 
   const dispatch= useDispatch()
   const navigate=useNavigate()
@@ -28,7 +28,7 @@ const StudentLogin = () => {
      e.preventDefault()
        
      dispatch(logIn(data)).then((res)=>{
-      console.log(res);
+   
         res=="Success Login"? navigate("/studentpage") : setErrorMsg(res.response.data)
   
      })

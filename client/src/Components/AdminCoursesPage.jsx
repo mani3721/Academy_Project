@@ -15,7 +15,7 @@ const AdminCoursesPage = () => {
   const [value, setValue] = useState('');
   const [getCall, setgetCall]=useState()
   const [Loading, setLoading]=useState(false)
-  console.log(selectedID, "selected");
+
   const [search, setSearch] = useState("");
 
 
@@ -61,7 +61,7 @@ const [selectedCategory, setSelectedCategory]=useState("")
         
       })
 
-      console.log(result,"result");
+      
       setData(result);
     };
 
@@ -73,7 +73,7 @@ const [selectedCategory, setSelectedCategory]=useState("")
     setLoading(true)
      
     await courcepublish(selectedID).then((res)=>{
-       console.log(res);
+    
        setgetCall(res)
        setLoading(false)
        setSelected([])

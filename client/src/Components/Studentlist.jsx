@@ -25,7 +25,7 @@ const StudentDetails = () => {
     const fetcAllStudentData = async () => {
       const { data } = await getAllStudentData();
 
-      console.log(data, "data");
+
 
       const result = data.filter((student) => {
         return student.name.toLowerCase().includes(search);
@@ -40,7 +40,7 @@ const StudentDetails = () => {
   const handledelete = async (id) => {
     setId(id);
     setLoading(true);
-    console.log(id);
+
     // setSuccessmsg(true)
 
     await deleteStudentData(id).then((res) => {

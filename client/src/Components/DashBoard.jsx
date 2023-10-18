@@ -215,7 +215,7 @@ const [fetcheventscall,setFetchEventsCall]=useState([])
     );
   };
   const next = () => {
-    console.log(selectedMonth,"months");
+   
 
     setSelectedMonth(selectedMonth.clone().add(1, 'month'));
   };

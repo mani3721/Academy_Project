@@ -24,7 +24,7 @@ const [activeTab, setActiveTab]=useState('Admin')
     const handleSubmit=(e)=>{
       e.preventDefault()
         dispatch(adminLogin(data)).then((res)=>{
-          console.log(res);
+      
            if (res==="Success Login") {
               navigate('/category/dashboard')
            }else{

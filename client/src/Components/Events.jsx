@@ -4,7 +4,7 @@ import moment from "moment";
 import {MdDeleteOutline} from 'react-icons/md'
   const Events=({selectedDay,selectedMonthEvents,removeEvent,fetcheventscall })=>{
 
-    console.log(selectedMonthEvents,selectedDay,"eventsss");
+    
     const [monthEvents, setmonthEventsRendered]=useState([])
     const [Loading, setLoading]=useState(false)
     const [id, setID]=useState('')
@@ -13,7 +13,6 @@ import {MdDeleteOutline} from 'react-icons/md'
       const fetchEventsData= async ()=>{
          const {data}= await fetchEvents()
 
-         console.log(data,"caldata");
 
          setmonthEventsRendered(data)
       }
