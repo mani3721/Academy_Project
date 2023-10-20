@@ -1,6 +1,7 @@
 import { BsThreeDotsVertical } from "react-icons/bs";
 import rooms from "../assest/daymeeting.png";
 import { RiUserVoiceFill } from "react-icons/ri";
+import dayjs from "dayjs";
 const EventList = ({ events, hour, currentTime, opensideBar }) => {
 
 
@@ -23,22 +24,44 @@ const EventList = ({ events, hour, currentTime, opensideBar }) => {
   });
   
 
- 
+  const isBefore = (dates) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
+    let result = {};
+  
+    for (const evtdate of dates) {
+      const date = new Date(evtdate);
+      date.setHours(0, 0, 0, 0);
+  
+      if (date < today) {
+        result[evtdate] = 'line-through';
+      } else{
+        result[evtdate] ='future'
+      }
+    }
+  
+    return result;
+  };
+  
+
+  let dates=['2023-10-02','2023-10-05','2023-10-20']
+
+ 
+console.log(isBefore(dates)[dates]);
   
 
  
   return (
     <div
       onClick={() => opensideBar(true,eventsInHour)}
-      className="bg-[#e9f4f5] shadow-md cursor-pointer flex  items-center rounded-md h-20"
+      className="bg-[#e9f4f5] shadow-md cursor-pointer  flex items-center rounded-md h-20"
     >
       {eventsInHour.slice(-1).map((event) => (
       
         <div
           key={event.id}
-          className={`p-2 flex items-center justify-center  ${
-            isEventActive(event, currentTime) ? "text-green-600" : ""
+          className={`p-2 flex items-center justify-center  ${ isEventActive(event, currentTime) ? "text-green-600" : ""
           }`}
         >
 

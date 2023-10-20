@@ -10,10 +10,12 @@ const Addbatch = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const params= useParams()
-
+  const params = useParams();
 
   const [studentsList, setStudentList] = useState("");
+
+  console.log(studentsList,"studenttttt");
+
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [data, setData] = useState({
     batchname: "",
@@ -29,10 +31,12 @@ const Addbatch = () => {
     remarks: "",
     status: "",
   });
+
+  console.log(data, "data");
   const Loading = useSelector((state) => state.StudentReducer.loading);
   useEffect(() => {
     const fetcAllStudentData = async () => {
-      const { data } = await getAllStudentData();
+         const { data } = await getAllStudentData();
 
       let studentsdata = [];
       data.map((list) => {
@@ -45,48 +49,36 @@ const Addbatch = () => {
     fetcAllStudentData();
   }, []);
 
+  const convertdate = (data) => {
+    let date = new Date(data);
+    let day = String(date.getDate()).padStart(2, "0");
+    let month = String(date.getMonth() + 1).padStart(2, "0");
+    let year = date.getFullYear();
+  
+    return `${year}-${month}-${day}`;
+  };
+
+  useEffect(() => {
+    const getbatch = async () => {
+      if (params.id == "add") {
+      } else {
+        const { data } = await fetchbatchbyid(params.id);
+
+        let startime = convertdate(data.start_date);
 
 
+        console.log(startime,"startdate");
 
+        let endtime = convertdate(data.end_date);
 
-const convertdate=(data)=>{
+        setData({ ...data, start_date: startime, end_date: endtime });
 
-  let date = new Date(data);
-        let day = date.getDate();
-        let month = String(date.getMonth() + 1).padStart(2,'0')
-        let year = date.getFullYear();
-      
-     return `${year}-${month}-${day}`;
-}
-
-  useEffect(()=>{
-
-    const getbatch= async ()=>{
-
-      if (params.id=='add') {
-        
-      }else{
-        const {data}= await fetchbatchbyid(params.id)
-
-        
-        let startime= convertdate(data.start_date)
-
-        let endtime=convertdate(data.end_date)
-        
-    
-        setData({...data, start_date:startime, end_date:endtime})
-
-        setStudentList(data.students)
+        setStudentList(data.students);
       }
+    };
 
-
-      
-         
-    }
-
-    getbatch()
-
-  },[params.id])
+    getbatch();
+  }, [params.id]);
 
   const [error, setError] = useState();
   const [errorMsg, setErrorMsg] = useState(false);
@@ -94,8 +86,7 @@ const convertdate=(data)=>{
   const handleChange = (e) => {
     setData({
       ...data,
-      [e.target.name]: e.target.value,
-      students: studentsList,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -121,27 +112,23 @@ const convertdate=(data)=>{
   }
 
   const handleSubmit = async (e) => {
-   
     e.preventDefault();
     let allDates = getDatesBetween(
       new Date(data.start_date),
       new Date(data.end_date)
     );
 
-   
-
-    if (params.id=='add') {
-      await dispatch(addbatch({ ...data, dates: allDates })).then((res) => {
-  
+    if (params.id == "add") {
+      await dispatch(addbatch({ ...data, dates: allDates,  students: studentsList })).then((res) => {
         res._id && navigate("/category/Schedule");
       });
-    }else{
-      await dispatch(updateBatch(params.id, data)).then((res) => {
-      
-        res._id && navigate("/category/Schedule");
-      });
+    } else {
+      await dispatch(updateBatch(params.id, { ...data, dates: allDates,   students: studentsList })).then(
+        (res) => {
+          res._id && navigate("/category/Schedule");
+        }
+      );
     }
-   
   };
 
   return (
@@ -393,7 +380,11 @@ const convertdate=(data)=>{
                     />
                   </svg>
                 )}
-                {Loading ? "Loading..." : params.id=='add' ? "Create Batch" :"Save"}
+                {Loading
+                  ? "Loading..."
+                  : params.id == "add"
+                  ? "Create Batch"
+                  : "Save"}
               </button>
             </div>
           </div>

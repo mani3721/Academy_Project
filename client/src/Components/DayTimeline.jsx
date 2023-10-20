@@ -7,17 +7,17 @@ const DayTimeline = ({ events ,openside,currentDate }) => {
   const hours = Array.from({ length: 24 }, (_, i) => i); // Generate an array of 0 to 23
  
   
-  // useEffect(() => {
-  //   // Update the current time every second
-  //   const intervalId = setInterval(() => {
-  //     setCurrentTime(new Date());
-  //   }, 1000);
+  useEffect(() => {
+    // Update the current time every 1 minute
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 60000); // 1 minute = 60,000 milliseconds
 
-  //   return () => {
-  //     // Clean up the interval when the component unmounts
-  //     clearInterval(intervalId);
-  //   };
-  // }, []);
+    return () => {
+      // Clean up the interval when the component unmounts
+      clearInterval(intervalId);
+    };
+  }, []);
 
   const eventsForSelectedDate = events.filter((event) =>  event.dates.includes(currentDate));
  
@@ -33,14 +33,16 @@ const DayTimeline = ({ events ,openside,currentDate }) => {
   // };
   return (
     <div className=" h-full">
+      
       <ul>
         {hours.map((hour) => (
           <div key={hour} className=" flex gap-4 px-5 font-poppins ">
         <div className="text-[#525b68]">
         {hour.toString().padStart(2, '0')}:00 {hour>12 ? 'pm': 'am'}
         </div>
+     
       
-          {/* {hour==currentTime.toLocaleTimeString().slice(0,2) && <p className="bg-fuchsia-700 absolute">Current Time: {currentTime.toLocaleTimeString()}</p>} */}
+          {/* {<p className="bg-fuchsia-700 relative">Current Time: {currentTime.toLocaleTimeString()}</p>} */}
           <div className="py-8">
           <EventList opensideBar={openside} events={eventsForSelectedDate}  hour={hour}  currentTime={currentTime}/>
           </div>
