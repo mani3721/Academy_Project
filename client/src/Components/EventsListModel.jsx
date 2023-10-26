@@ -13,15 +13,20 @@ import { useDispatch } from "react-redux";
 import { sendmeetinglink } from "../actions/MeetingAction";
 import EventsModel from "./EventsModel";
 import { MdDeleteOutline } from "react-icons/md";
+import { FaLaptopCode } from "react-icons/fa";
+import { deletebatch } from "../api/addbatchRequest";
+import {TbDeviceDesktopSearch} from 'react-icons/tb'
 
-const EventsListModel = ({ setclosemodel, datas }) => {
+const EventsListModel = ({ setclosemodel, datas,setcall }) => {
+
+  console.log(datas,"datas");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [openstudents, setStudents] = useState(false);
   const [meetingLink, setMeetingLink] = useState(
     "https://meet.google.com/tih-kfdy-vrk"
   );
-
+  const [Loading, setLoading] = useState(false);
   const [handleopen, sethandleopen] = useState(false);
 
   console.log(meetingLink, "meeting");
@@ -50,7 +55,13 @@ const EventsListModel = ({ setclosemodel, datas }) => {
      
     });
   };
-
+  function differenceInMonths(date1, date2) {
+    const monthDiff = date1.getMonth() - date2.getMonth();
+    const yearDiff = date1.getYear() - date2.getYear();
+  
+    return monthDiff + yearDiff * 12;
+  }
+  
   function monthDiff(d1, d2) {
     var months;
     months = (d2.getFullYear() - d1.getFullYear()) * 12;
@@ -59,6 +70,18 @@ const EventsListModel = ({ setclosemodel, datas }) => {
     return months <= 0 ? 0 : months;
 }
 
+const handledeleteBatch= async (id)=>{
+    
+  setLoading(true)
+
+  id &&  await deletebatch(id).then((res)=>{
+    console.log(res, "delete");
+    setLoading(false)
+    setcall(true)
+  })
+
+
+}
   
 
   function tConv24(time24) {
@@ -74,8 +97,8 @@ const EventsListModel = ({ setclosemodel, datas }) => {
   return (
     <>
       <div className=" perspective h-screen w-full gap-6 bg-gray-400 backdrop-filter backdrop-blur-sm bg-opacity-40 fixed z-50 left-0 top-0 flex justify-center items-center">
-        <div className="page bg-[#ffffff] rounded-3xl w-[40%] h-[80vh]">
-          <div className="bg-[#0d817b] rounded-t-3xl h-full">
+        <div className="page bg-[#ffffff] rounded-3xl w-[40%] h-[85vh]">
+          <div className="bg-[#0d817b] rounded-3xl h-full">
             <div className="p-6">
               <div className="border-b border-opacity-5 p-1 flex justify-between">
                 <div>
@@ -89,7 +112,7 @@ const EventsListModel = ({ setclosemodel, datas }) => {
                   <AiOutlineCloseCircle fontSize={20} color="#fff" />
                 </div>
               </div>
-
+              {!datas.length && <div className="flex justify-center items-center text-white gap-4"> <TbDeviceDesktopSearch/> No Batch </div>}
               <div
                 className={` flex-col gap-2 mt-10 max-h-44 overflow-auto items-center flex justify-center cursor-pointer `}
               >
@@ -140,8 +163,8 @@ const EventsListModel = ({ setclosemodel, datas }) => {
           {/* <EventsModel/> */}
         </div>
         {handleopen && (
-          <div className=" bg-[#ffffff] rounded-3xl w-[40%] h-[80vh]">
-            <div className="bg-[#0d817b] rounded-t-3xl h-[50vh]">
+          <div className=" bg-[#ffffff] rounded-3xl w-[40%] h-[85vh]">
+            <div className="bg-[#0d817b] rounded-t-3xl h-[55vh]">
               <div className="p-6">
                 <div className="border-b border-opacity-5 p-1 flex justify-between">
                   <div>
@@ -164,14 +187,20 @@ const EventsListModel = ({ setclosemodel, datas }) => {
                           {evnt.batchname}
                         </div>{" "}
                         <div className="flex gap-4 ">
-                          <div>
-                            <MdDeleteOutline fontSize={20} color="white" />
-                          </div>{" "}
+                        <div className="cursor-pointer" onClick={()=>handledeleteBatch(evnt._id)}>
+                        {
+                            Loading ?   <div
+                            class="inline-block  h-5 w-5 animate-spin rounded-full border-2 border-solid border-white border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                            role="status"
+                          ></div> :  <MdDeleteOutline color="white" fontSize={22}  className="" />
+                          }
+                       
+                        </div>{" "}
                           <div
-                            onClick={() => navigate("/category/addbatch")}
+                           
                             className="cursor-pointer"
                           >
-                            <AiOutlineEdit fontSize={20} color="#fff" />
+                            <AiOutlineEdit fontSize={20} color="#fff" onClick={() => navigate(`/category/addbatch/${evnt._id}`)} />
                           </div>
                         </div>
                       </div>
@@ -179,6 +208,11 @@ const EventsListModel = ({ setclosemodel, datas }) => {
                         <img src={rooms} width={23} alt="" />{" "}
                         <h1 className="text-white font-poppins">{evnt.room}</h1>
                       </div>
+                      <div className="text-white text-sm font-poppins flex items-center gap-2">
+                      <FaLaptopCode fontSize={17} />{" "}
+                      <span className="">{evnt.coursename}</span>{" "}
+                  
+                    </div>
                       <div className="text-white text-sm font-poppins flex items-center gap-2">
                         <PiStudentFill fontSize={17} />{" "}
                         <span className="">{5} Present</span>-{" "}
@@ -192,7 +226,10 @@ const EventsListModel = ({ setclosemodel, datas }) => {
                       </div>
                       <div className="text-white text-sm font-poppins flex items-center gap-2">
                     <BsFillCalendarDateFill />
-                    <h1>{monthDiff(new Date(evnt.start_date), new Date(evnt.end_date))} Months</h1>
+                    <h1>
+                        {differenceInMonths(new Date(evnt.end_date), new Date(evnt.start_date)  )} {" "}
+                        Months
+                      </h1>
                     </div>
                       <div className="text-white text-sm font-poppins flex items-center gap-2">
                         <BiTimeFive fontSize={17} /> {tConv24(evnt.start_time)}-{" "}
@@ -257,11 +294,28 @@ const EventsListModel = ({ setclosemodel, datas }) => {
                         </div>
                       </div>
                       <div className="div">
-                        <div className="flex gap-1 items-center">
-                          <GrDocumentText />{" "}
-                          <h1 className="font-poppins">Documents</h1>
-                        </div>
+                      <div className="flex gap-1 items-center">
+                        <GrDocumentText />{" "}
+                        <h1 className="font-poppins">Upload attachments</h1>
                       </div>
+
+                      <div className=" flex items-center  ">
+                        <label class="w-64 flex justify-center items-center p-2 gap-3 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer ">
+                          <svg
+                            class="w-8 h-8"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                          </svg>
+                          <span class="mt-2 text-base leading-normal">
+                            Select a file
+                          </span>
+                          <input type="file" class="hidden" />
+                        </label>
+                      </div>
+                    </div>
                     </div>
                   ))}
                 </div>

@@ -6,11 +6,12 @@ import EventsListModel from "./EventsListModel";
 import { SiBlockchaindotcom } from "react-icons/si";
 import {SlBadge}  from 'react-icons/sl'
 
-const Days = ({ days, rowIdx, setGetmodeldata, keys, datas }) => {
+const Days = ({ days, rowIdx, setGetmodeldata, keys, datas,setOpenCall }) => {
 
   const [data, setData] = useState([]);
-  const [openlist, setOpenList] = useState(false);
 
+  console.log(data,"dateeeeeeeeeee");
+  const [openlist, setOpenList] = useState(false);
   let currentDate;
   const date = new Date();
 
@@ -162,6 +163,7 @@ const checkdatesss = (event) => {
 
         {openlist && (
           <EventsListModel
+            setcall={setOpenCall}
             datas={data}
             setclosemodel={() => setOpenList(false)}
           />

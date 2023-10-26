@@ -300,7 +300,7 @@ const Addbatch = () => {
                       >
                         Choose staff
                       </option>
-                      <option value="GOBI">GOBI</option>
+                      <option value="GOBI">GOPI</option>
                       <option value="LATHA">LATHA</option>
                       <option value="JABA">JABA</option>
                     </select>

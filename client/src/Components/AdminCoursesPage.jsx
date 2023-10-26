@@ -169,9 +169,7 @@ const [selectedCategory, setSelectedCategory]=useState("")
                   {data.map((item) => (
                     <div
                       className={`${
-                        item.status == activeTab || item.activeTap == activeTab 
-                          ? "block"
-                          : "hidden"
+                        item.status == activeTab || item.activeTap == activeTab ? "block" : "hidden"
                       } `}
                     >
                       {" "}

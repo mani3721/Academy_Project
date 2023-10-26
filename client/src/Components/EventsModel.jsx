@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { sendmeetinglink } from "../actions/MeetingAction";
 import { deletebatch, fetchbatchbyid } from "../api/addbatchRequest";
 import loading from "../assest/loading.png";
+import {FaLaptopCode} from 'react-icons/fa'
 import { MdDeleteOutline } from "react-icons/md";
 import dayjs from "dayjs";
 const EventsModel = ({ setclosemodel, events,setGetCall }) => {
@@ -104,7 +105,7 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
   return (
     <>
       <div className="h-screen w-full  bg-gray-400 backdrop-filter backdrop-blur-sm bg-opacity-40 fixed z-50 left-0 top-0 flex justify-center items-center">
-        <div className=" bg-[#ffffff] rounded-3xl w-[40%] h-[80vh]">
+        <div className=" bg-[#ffffff] rounded-3xl w-[40%] h-[85vh]">
           {/* {
             Loading && (<div className="flex justify-center gap-2 items-center h-full">
             <img className="animate-spin" src={loading} width={40} alt="" />
@@ -112,7 +113,7 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
         </div>)
            } */}
 
-          <div className="bg-[#0d817b] rounded-t-3xl h-[50vh]">
+          <div className="bg-[#0d817b] rounded-t-3xl h-[55vh]">
             <div className="p-6">
               <div className="border-b border-opacity-5 p-1 flex justify-between">
                 <div>
@@ -157,11 +158,19 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
                       <h1 className="text-white font-poppins">{evnt.room}</h1>
                     </div>
                     <div className="text-white text-sm font-poppins flex items-center gap-2">
+                      <FaLaptopCode fontSize={17} />{" "}
+                      <span className="">{evnt.coursename}</span>{" "}
+                  
+                    </div>
+                    <div className="text-white text-sm font-poppins flex items-center gap-2">
                       <PiStudentFill fontSize={17} />{" "}
                       <span className="">{5} Present</span>-{" "}
                       <span className="">{0} Absent </span> / Total={" "}
                       <span> {15} Students </span>
                     </div>
+
+
+
                     <div className="text-white text-sm font-poppins flex items-center gap-2">
                       <BsFillCalendarDateFill /> {displaydate(evnt.start_date)}{" "}
                       to {displaydate(evnt.end_date)}{" "}

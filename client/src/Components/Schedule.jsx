@@ -17,7 +17,7 @@ const Schedule = () => {
   const navigate = useNavigate();
   const [active, setActive] = useState("Week");
   const [currenMonth, setCurrentMonth] = useState(getMonth());
-  const [getCall, setGetCalls]=useState('')
+  const [getCall, setGetCalls]=useState(false)
   const [monthIndex, setMonthIndex]=useState(dayjs().month())
 
   const [sendEvents, setEvents]=useState([])
@@ -202,7 +202,7 @@ function formatDates(inputDate) {
               </div>
             </div>
             <div className="w-full  ">
-              {active =="Week" ?  <AnimatedPage> <div className=""> <Month data={dataa} month={currenMonth} getmodeldata={setgetmodeldata}/></div> </AnimatedPage>   : <AnimatedPage> <DayCalender currentDate={currentDate} setGetCall={(e)=>setGetCalls(e)}/></AnimatedPage>  }
+              {active =="Week" ?  <AnimatedPage> <div className=""> <Month setOpenCal={()=>setGetCalls(!getCall)} data={dataa} month={currenMonth} getmodeldata={setgetmodeldata}/></div> </AnimatedPage>   : <AnimatedPage> <DayCalender currentDate={currentDate} setGetCall={(e)=>setGetCalls(e)}/></AnimatedPage>  }
             
             </div>
            </div>
