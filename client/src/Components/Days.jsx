@@ -141,7 +141,7 @@ const checkdatesss = (event) => {
             <p
               className={`${
                 ["Sat", "Sun"].includes(days.format("ddd"))
-                  ? "text-red-400 font-poppins font-semibold"
+                  ? "text-red-400 font-poppins  font-semibold"
                   : "font-poppins font-semibold"
               }`}
             >
@@ -173,13 +173,14 @@ const checkdatesss = (event) => {
           className={`max-h-16  flex-col gap-2 items-center flex justify-center cursor-pointer `}
         >
           {data.slice(-1).map((evet, idx) => (
+        
             <div
               onClick={() => setGetmodeldata(evet, true)}
               className={`${
                 ["Sat", "Sun"].includes(days.format("ddd")) ? "bg-[#fdeeea] border-[#f29980] border-l-4  text-[#ee734f]" : "border-l-4 border-[#24bcc9]"
               } w-[90%] bg-[#e9f4f5] shadow-md  text-[#379a9c]   ${checkdatesss(evet.dates)[days.format("DD-MM-YY")] }   `}
             >
-
+    
               {/* {
                 <div className="relative right-4 bottom-1"> 
                      <span title="Present" class="relative flex h-3 w-3">

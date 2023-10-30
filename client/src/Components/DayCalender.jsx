@@ -206,7 +206,7 @@ const DayCalender = ({ currentDate, setGetCall }) => {
   };
 
   return (
-    <div className="  flex max-h-[75vh] justify-between overflow-auto">
+    <div className="bg-blue-600  flex max-h-[75vh] justify-between overflow-auto">
       <DayTimeline
         openside={setOpenSidebar}
         events={events}

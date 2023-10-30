@@ -22,24 +22,33 @@ const DayTimeline = ({ events ,openside,currentDate }) => {
   const eventsForSelectedDate = events.filter((event) =>  event.dates.includes(currentDate));
  
   console.log(eventsForSelectedDate,"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-  // function tConv24(time24) {
-  //   var ts = time24;
-  //   var H = +ts.substr(0, 2);
-  //   var h = (H % 12) || 12;
-  //   h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
-  //   var ampm = H < 12 ? " AM" : " PM";
-  //   ts = h + ts.substr(2, 3) + ampm;
-  //   return ts;
-  // };
+  function tConv24(time24) {
+
+    let format=`${time24.toString().padStart(2, '0')}:00`
+
+    // console.log(`${time24.toString().padStart(2, '0')}:00`,"timeeeeee");
+    var ts = format;
+    var H = +ts.substr(0, 2);
+    var h = (H % 12) || 12;
+    h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
+    var ampm = H < 12 ? " AM" : " PM";
+    ts = h + ts.substr(2, 3) + ampm;
+    return ts;
+  };
+
+  console.log(tConv24('18:00'),"covert");
   return (
-    <div className=" h-full">
+    <div className="bg-yellow-400 h-full">
       
       <ul>
         {hours.map((hour) => (
           <div key={hour} className=" flex gap-4 px-5 font-poppins ">
         <div className="text-[#525b68]">
-        {hour.toString().padStart(2, '0')}:00 {hour>12 ? 'pm': 'am'}
+          {tConv24(hour)}
+        {/* {hour.toString().padStart(2, '0')}:00 {hour>12 ? 'pm': 'am'} */}
         </div>
+
+        
      
       
           {/* {<p className="bg-fuchsia-700 relative">Current Time: {currentTime.toLocaleTimeString()}</p>} */}

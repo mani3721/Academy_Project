@@ -25,6 +25,7 @@ import { color } from "framer-motion";
 import {FaUserTie} from 'react-icons/fa'
 import SideBar from "./sideBar";
 import { getAllStaffData } from "../api/StaffRequest";
+import PageFooter from "./PageFooter";
 const isNotActiveStyle =
   "flex items-center px-2 gap-4 text-gray-500 hover:text-[#6ca1eb]  transition-all duration-200 ease-in-out capitalize";
 const isActiveStyle =
@@ -362,7 +363,7 @@ const handleDelete= async (id)=>{
     <>
       <AnimatedPage>
         <div className="bg-[#ffffff]">
-          <div className="flex items-center justify-between p-8">
+          <div className="flex items-center justify-between p-5">
             <div className="flex items-center justify-start">
               <div className="px-3">
                 <Link to="/">
@@ -612,7 +613,11 @@ const handleDelete= async (id)=>{
                 </div>
               </div>
             </div>
+          
           </div>
+          <div>
+             <PageFooter/>
+            </div>
         </div>
       </AnimatedPage>
     </>
