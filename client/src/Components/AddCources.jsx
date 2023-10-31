@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AnimatedPage from "../Container/Framermotion";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { HiMegaphone } from "react-icons/hi2";
 import { RiDraftLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +10,6 @@ import 'react-quill/dist/quill.snow.css';
 import check from '../assest/check.png'
 import { getidbydata } from "../api/CourceRequest";
 const AddCources = () => {
-  const [value, setValue] = useState('');
-
  const params= useParams()
 
 
@@ -31,14 +29,14 @@ const AddCources = () => {
   const [error, setError] = useState();
   const [errorMsg, setErrorMsg] = useState(false);
   const [fileUpload, setFileUpload]=useState(false)
-  const [images, setImage] = useState();
   const [id, setId]=useState()
-  const date = new Date();
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
 
-  let currentDate = `${day} ${month} ${year}`;
+  // const date = new Date();
+  // const day = date.getDate();
+  // const month = date.getMonth() + 1;
+  // const year = date.getFullYear();
+
+  // let currentDate = `${day} ${month} ${year}`;
 
 
 
@@ -62,7 +60,7 @@ const AddCources = () => {
   };
 
  useEffect(()=>{
-  if (params.id=="add") {
+  if (params.id==="add") {
     
   }else{ 
     const fetchdata=async ()=>{
@@ -95,7 +93,7 @@ const AddCources = () => {
    
     e.preventDefault();
     
-    if (params.id=='add') {
+    if (params.id==='add') {
       if (data.title && data.category && data.date ) {
         dispatch(addcource({...data, activeTap:id})).then((res) => {
       
@@ -310,7 +308,7 @@ const AddCources = () => {
                 </div>
               </div>
             </div>
-            {params.id=='add' ?  <div className="flex justify-between p-3 w-[80%] items-center gap-4">
+            {params.id==='add' ?  <div className="flex justify-between p-3 w-[80%] items-center gap-4">
               <div
                 onClick={() => navigate("/category/cources")}
                 className=" text-[20px] border-gray-400 border-2 rounded-full text-black p-2 "
@@ -320,25 +318,25 @@ const AddCources = () => {
               <div className="flex gap-5 text-[20px] items-center">
                 <div  onClick={(e)=>handleSubmit(e,"draft")} className="flex cursor-pointer items-center gap-2 text-red-500 p-2 border-2 border-red-400 font-roboto rounded-full px-10">
                <RiDraftLine />
-                  { id == 'draft' && Loading && (
+                  { id === 'draft' && Loading && (
                 <div
                   class="inline-block h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
                   role="status"
                 ></div>
-              )} {id == 'draft' && Loading? "Loading..": 'Draft' }
+              )} {id === 'draft' && Loading? "Loading..": 'Draft' }
                 </div>
                 <div
                   onClick={(e)=>handleSubmit(e,"publish")}
                   className="flex items-center cursor-pointer gap-2 bg-[#2081e2] p-2 font-roboto text-white rounded-full px-10 "
                 >
                  <HiMegaphone />
-                  { id == 'publish' && Loading && (
+                  { id === 'publish' && Loading && (
                 <div
                   class="inline-block h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
                   role="status"
                 ></div>
               )}
-                 {id == 'publish' && Loading ? "Published":  'Publish'}
+                 {id === 'publish' && Loading ? "Published":  'Publish'}
                 </div>
               </div>
             </div>: <div className="flex justify-between p-3 w-[80%] items-center "> 

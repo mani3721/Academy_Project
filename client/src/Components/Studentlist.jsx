@@ -230,7 +230,7 @@ const StudentDetails = () => {
                                 <td class="py-3 px-6 text-left whitespace-nowrap font-poppins text-sm cursor-pointer">
                                   <div class="flex items-center">
                                     <div class="mr-2">
-                                      {id == student._id && Loading ? (
+                                      {id === student._id && Loading ? (
                                         <div
                                           class="inline-block  h-4 w-4 animate-spin rounded-full border-2 border-solid border-black border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
                                           role="status"

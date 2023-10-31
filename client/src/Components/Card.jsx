@@ -14,7 +14,6 @@ const Card = ({ item, handleChange, activeTab, setCall,loading }) => {
   const [Loading, setLoading] = useState(false||loading);
   const [isActive, setActive] = useState("");
   //   const [getCall, setCall]=useState()
-  const [id, setId] = useState();
   const smallDrapdown = (id) => {
     setopenDrapDown(!openDrapDown);
     SetopenSmallDrapdown(id);
@@ -27,7 +26,6 @@ const Card = ({ item, handleChange, activeTab, setCall,loading }) => {
   let currentDate = `${day}/${month}/${year}`;
 
   const handleDeleteCource = async (id) => {
-    setId(id);
     setLoading(true);
     setActive("delete");
     await deleteCourses(id).then((res) => {
@@ -53,7 +51,7 @@ const Card = ({ item, handleChange, activeTab, setCall,loading }) => {
       <div class="w-full p-5 rounded-md">
         <div
           className={`flex ${
-            activeTab == "draft" ? "justify-between" : "justify-end"
+            activeTab === "draft" ? "justify-between" : "justify-end"
           }  items-center`}
         >
           <div>
@@ -63,13 +61,13 @@ const Card = ({ item, handleChange, activeTab, setCall,loading }) => {
               value={item._id}
               onChange={(e) => handleChange(e, item._id)}
               className={`${
-                activeTab == "draft"
+                activeTab === "draft"
                   ? "block h-5 w-5 cursor-pointer "
                   : "hidden"
               }`}
             />
           </div>
-          {(activeTab == "draft" || activeTab == "publish") && (
+          {(activeTab === "draft" || activeTab === "publish") && (
             <div onClick={() => smallDrapdown(item._id)}>
               <BsThreeDots
                 fontSize={30}
@@ -78,12 +76,12 @@ const Card = ({ item, handleChange, activeTab, setCall,loading }) => {
             </div>
           )}
         </div>
-        {(activeTab == "draft" || activeTab == "publish") && (
+        {(activeTab === "draft" || activeTab === "publish") && (
           <div className="relative">
-            {openDrapDown && openSmallDrapdown == item._id && (
+            {openDrapDown && openSmallDrapdown === item._id && (
               <div className="absolute  top-3.5 font-roboto right-5 ">
                 <div className="z-10 p-3 px-7   w-full flex-col  justify-center items-center text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
-                  {activeTab == "draft" && (
+                  {activeTab === "draft" && (
                     <div onClick={()=>navigate(`/category/addcource/${item._id}`)} className="flex justify-center  items-center py-3 gap-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                      <div className="flex items-center justify-center gap-4">
                      <AiOutlineEdit />
@@ -93,9 +91,9 @@ const Card = ({ item, handleChange, activeTab, setCall,loading }) => {
                      </div>
                     </div>
                   )}
-                  {activeTab == "publish" && (
+                  {activeTab === "publish" && (
                     <div className="flex justify-center items-center py-3 gap-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                        {isActive == "draft" && Loading ? (
+                        {isActive === "draft" && Loading ? (
                         <div
                           className="flex h-4 w-4 animate-spin rounded-full border-2 border-solid border-black border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
                           role="status"
@@ -117,7 +115,7 @@ const Card = ({ item, handleChange, activeTab, setCall,loading }) => {
                   )}
                
                     <div className="flex justify-center gap-2 items-center py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                      {isActive == "delete" && Loading ? (
+                      {isActive === "delete" && Loading ? (
                         <div
                           className="flex h-4 w-4 animate-spin rounded-full border-2 border-solid border-black border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
                           role="status"
@@ -159,8 +157,9 @@ const Card = ({ item, handleChange, activeTab, setCall,loading }) => {
           <div class="rounded-lg w-full h-[30vh] flex items-center justify-center overflow-hidden mb-8 p-2 ">
             <img
               src={item.image}
-              alt="image"
+              alt="avatar"
               class="w-full rounded-xl object-cover"
+
             />
           </div>
           <div className="  px-5 py-3">

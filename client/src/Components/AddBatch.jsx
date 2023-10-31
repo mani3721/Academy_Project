@@ -60,7 +60,7 @@ const Addbatch = () => {
 
   useEffect(() => {
     const getbatch = async () => {
-      if (params.id == "add") {
+      if (params.id === "add") {
       } else {
         const { data } = await fetchbatchbyid(params.id);
 
@@ -80,8 +80,7 @@ const Addbatch = () => {
     getbatch();
   }, [params.id]);
 
-  const [error, setError] = useState();
-  const [errorMsg, setErrorMsg] = useState(false);
+
 
   const handleChange = (e) => {
     setData({
@@ -118,7 +117,7 @@ const Addbatch = () => {
       new Date(data.end_date)
     );
 
-    if (params.id == "add") {
+    if (params.id === "add") {
       await dispatch(addbatch({ ...data, dates: allDates,  students: studentsList })).then((res) => {
         res._id && navigate("/category/Schedule");
       });
@@ -382,7 +381,7 @@ const Addbatch = () => {
                 )}
                 {Loading
                   ? "Loading..."
-                  : params.id == "add"
+                  : params.id === "add"
                   ? "Create Batch"
                   : "Save"}
               </button>

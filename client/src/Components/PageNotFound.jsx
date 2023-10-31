@@ -19,12 +19,12 @@ const PageNotFound=()=>{
                         </div>
                     </div>
                     <div>
-                        <img src="https://i.ibb.co/G9DC8S0/404-2.png" />
+                        <img src="https://i.ibb.co/G9DC8S0/404-2.png" alt="error"/>
                     </div>
                 </div>
             </div>
             <div>
-                <img src="https://i.ibb.co/ck1SGFJ/Group.png" />
+                <img src="https://i.ibb.co/ck1SGFJ/Group.png" alt="error404" />
             </div>
         </div>
         </>

@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Days from "./Days";
-import { getMonth } from "../utils/calender";
-import { fetchAllBatch } from "../api/addbatchRequest";
 
 export default function Month({getmodeldata,month,data,setOpenCal}) {
         

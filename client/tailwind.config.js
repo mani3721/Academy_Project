@@ -8,7 +8,9 @@ module.exports = {
       backgroundColor: ['even'],
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif'],
-        'roboto':  ['Roboto', 'sans-serif']
+        'roboto':  ['Roboto', 'sans-serif'],
+        'Orbitron':['Orbitron', 'sans-serif'],
+        'Tinos':['Tinos', 'serif']
       },
     },
   },

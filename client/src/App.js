@@ -1,6 +1,6 @@
 
 import Home from "./Container/Home";
-import {Routes, Route , Navigate, useNavigate} from 'react-router-dom'
+import {Routes, Route } from 'react-router-dom'
 import StudentPage from "./Components/StudentPage";
 import StudentDetails from "./Components/Studentlist";
 import AdminLogin from "./Components/AdminLogin";
@@ -16,7 +16,6 @@ import AddStaff from "./Components/AddStaff";
 import AdminCoursesPage from "./Components/AdminCoursesPage";
 import AddCources from "./Components/AddCources";
 import Schedule from "./Components/Schedule";
-import Reports from "./Components/Reports";
 import Teams from "./Components/Team";
 import Addbatch from "./Components/AddBatch";
 import DateRangePicker from "./Components/Reports";

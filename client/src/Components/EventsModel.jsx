@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import { AiOutlineSend } from "react-icons/ai";
@@ -11,8 +11,7 @@ import { PiStudentFill } from "react-icons/pi";
 import { GrDocumentText } from "react-icons/gr";
 import { useDispatch } from "react-redux";
 import { sendmeetinglink } from "../actions/MeetingAction";
-import { deletebatch, fetchbatchbyid } from "../api/addbatchRequest";
-import loading from "../assest/loading.png";
+import { deletebatch } from "../api/addbatchRequest";
 import {FaLaptopCode} from 'react-icons/fa'
 import { MdDeleteOutline } from "react-icons/md";
 import dayjs from "dayjs";
@@ -22,9 +21,7 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [openstudents, setStudents] = useState(false);
-  const [meetingLink, setMeetingLink] = useState(
-    "https://meet.google.com/tih-kfdy-vrk"
-  );
+  let meetingLink='https://meet.google.com/tih-kfdy-vrk'
   const [Loading, setLoading] = useState(false);
 
 
@@ -190,7 +187,7 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
                     <div className="flex justify-between items-center">
                       <div className="flex gap-4 items-center">
                         <div className="p-2 cursor-pointer text-sm text-white bg-gray-700 rounded-md bg-clip-padding backdrop-filter font-poppins backdrop-blur-sm bg-opacity-20 border flex gap-1 border-gray-100">
-                          <img width={20} src={meet}></img> Join With Google
+                          <img width={20} src={meet} alt="meet"></img> Join With Google
                           Meet{" "}
                         </div>
 
@@ -231,7 +228,7 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
                         )}
                         <div className="relative cursor-pointer">
                           {eventsdata[0].students.length >= 10 && (
-                            <a
+                            <div 
                               onClick={() => setStudents(true)}
                               className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800"
                             >
@@ -243,7 +240,7 @@ const EventsModel = ({ setclosemodel, events,setGetCall }) => {
                                   eventsdata[0].students.length
                                 ).length
                               }
-                            </a>
+                            </div>
                           )}
                         </div>
                       </div>

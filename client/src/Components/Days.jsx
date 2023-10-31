@@ -1,10 +1,8 @@
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
-import { BiDotsVerticalRounded } from "react-icons/bi";
-import { fetchAllBatch } from "../api/addbatchRequest";
 import EventsListModel from "./EventsListModel";
 import { SiBlockchaindotcom } from "react-icons/si";
-import {SlBadge}  from 'react-icons/sl'
+
 
 const Days = ({ days, rowIdx, setGetmodeldata, keys, datas,setOpenCall }) => {
 
@@ -12,15 +10,15 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas,setOpenCall }) => {
 
   console.log(data,"dateeeeeeeeeee");
   const [openlist, setOpenList] = useState(false);
-  let currentDate;
-  const date = new Date();
+  // let currentDate;
+  // const date = new Date();
 
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
+  // let day = date.getDate();
+  // let month = date.getMonth() + 1;
+  // let year = date.getFullYear();
 
-  // This arrangement can be altered based on how we want the date's format to appear.
-  currentDate = `${day}-${month}-${year}`;
+  // // This arrangement can be altered based on how we want the date's format to appear.
+  // currentDate = `${day}-${month}-${year}`;
 
 
   // var middate = new Date((startdate.getTime() + enddate.getTime()) / 2);
@@ -30,7 +28,7 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas,setOpenCall }) => {
       //  const {data}= await fetchAllBatch()
 
     
-      const currentDates = new Date();
+      // const currentDates = new Date();
       const events = datas.filter((evt) => {
         for (const evtDate of evt.dates) {
           const formatDate = dayjs(evtDate, "YYYY-MM-DD").format("DD-MM-YY");
@@ -60,30 +58,30 @@ const Days = ({ days, rowIdx, setGetmodeldata, keys, datas,setOpenCall }) => {
       ? "bg-blue-500 text-white rounded-full px-1.5 font-extrabold "
       : "";
   }
-  function getPreviousDay() {
-    const currentDate = dayjs();
-    const previousDate = currentDate.subtract(1, "day");
+  // function getPreviousDay() {
+  //   const currentDate = dayjs();
+  //   const previousDate = currentDate.subtract(1, "day");
 
-    return currentDate.format("DD-MM-YY") === previousDate.format("DD-MM-YY")
-      ? "bg-blue-500 text-white rounded-full px-1.5 font-extrabold "
-      : "";
-  }
+  //   return currentDate.format("DD-MM-YY") === previousDate.format("DD-MM-YY")
+  //     ? "bg-blue-500 text-white rounded-full px-1.5 font-extrabold "
+  //     : "";
+  // }
 
-  function validateDate() {
-    let pickedDate = Date.parse("01-10-2023".replace(/-/g, " "));
-    let todaysDate = new Date();
-    todaysDate.setHours(0, 0, 0, 0);
-    let dateDifference = Math.abs(Number(todaysDate) - pickedDate);
-    //7 Days=60480000s0ms
+  // function validateDate() {
+  //   let pickedDate = Date.parse("01-10-2023".replace(/-/g, " "));
+  //   let todaysDate = new Date();
+  //   todaysDate.setHours(0, 0, 0, 0);
+  //   let dateDifference = Math.abs(Number(todaysDate) - pickedDate);
+  //   //7 Days=60480000s0ms
 
-    if (dateDifference > 604800000) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  //   if (dateDifference > 604800000) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
-  const dates = ["2023-10-03", "2023-10-05", "2023-10-27", "2023-10-25"];
+  // const dates = ["2023-10-03", "2023-10-05", "2023-10-27", "2023-10-25"];
 
 const checkdatesss = (event) => {
   const currentDates = dayjs(); // Get the current date using dayjs
@@ -92,7 +90,7 @@ const checkdatesss = (event) => {
   for (const evtDate of event) {
     const formattedDate = dayjs(evtDate).format("DD-MM-YY");
     if (dayjs(evtDate).isBefore(currentDates)) {
-      results[formattedDate]="line-through"
+      results[formattedDate]="zebra-stripes text-[#379a9c]"
     } else {
       results[formattedDate]='future'
     }
@@ -105,23 +103,23 @@ const checkdatesss = (event) => {
 
 // console.log(checkdatesss(dates)[days.format("DD-MM-YY")], "checkdatesss");
 
-  function isDateMoreThan7DaysAgo(dateString) {
-    // Convert the given date string to a Date object
-    const pickedDate = new Date(dateString);
-    const todaysDate = new Date();
+  // function isDateMoreThan7DaysAgo(dateString) {
+  //   // Convert the given date string to a Date object
+  //   const pickedDate = new Date(dateString);
+  //   const todaysDate = new Date();
 
-    // Set the time to midnight for both dates to ignore the time part
-    pickedDate.setHours(0, 0, 0, 0);
-    todaysDate.setHours(0, 0, 0, 0);
+  //   // Set the time to midnight for both dates to ignore the time part
+  //   pickedDate.setHours(0, 0, 0, 0);
+  //   todaysDate.setHours(0, 0, 0, 0);
 
-    // Calculate the time difference in milliseconds
-    const dateDifference = Math.abs(todaysDate - pickedDate);
+  //   // Calculate the time difference in milliseconds
+  //   const dateDifference = Math.abs(todaysDate - pickedDate);
 
-    // 7 days in milliseconds
-    const sevenDaysInMillis = 7 * 24 * 60 * 60 * 1000;
+  //   // 7 days in milliseconds
+  //   const sevenDaysInMillis = 7 * 24 * 60 * 60 * 1000;
 
-    return dateDifference > sevenDaysInMillis;
-  }
+  //   return dateDifference > sevenDaysInMillis;
+  // }
 
   function tConv24(time24) {
     var ts = time24;
@@ -137,7 +135,7 @@ const checkdatesss = (event) => {
     <>
       <div className=" flex shadow-sm flex-col  font-poppins min-h-[15vh]">
         <div className="flex  flex-col items-center">
-          {rowIdx == 0 && (
+          {rowIdx === 0 && (
             <p
               className={`${
                 ["Sat", "Sun"].includes(days.format("ddd"))
@@ -178,7 +176,7 @@ const checkdatesss = (event) => {
               onClick={() => setGetmodeldata(evet, true)}
               className={`${
                 ["Sat", "Sun"].includes(days.format("ddd")) ? "bg-[#fdeeea] border-[#f29980] border-l-4  text-[#ee734f]" : "border-l-4 border-[#24bcc9]"
-              } w-[90%] bg-[#e9f4f5] shadow-md  text-[#379a9c]   ${checkdatesss(evet.dates)[days.format("DD-MM-YY")] }   `}
+              } w-[90%] bg-[#eeebfa] shadow-md  text-[#7557d4]   ${checkdatesss(evet.dates)[days.format("DD-MM-YY")] }   `}
             >
     
               {/* {

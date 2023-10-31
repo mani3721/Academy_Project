@@ -88,7 +88,7 @@ const [activeTab, setActiveTab]=useState('Admin')
                 type="password"
                 name="password"
                 id=""
-                className={` ${errorMsg =="Wrong Password"? "border-red-400 outline-none placeholder:text-slate-300 text-sm font-poppins  rounded-md p-3 border-2" :"border-gray-200 placeholder:text-slate-300 text-sm font-poppins  rounded-md p-3 border-2 outline-none"}  `}
+                className={` ${errorMsg ==="Wrong Password"? "border-red-400 outline-none placeholder:text-slate-300 text-sm font-poppins  rounded-md p-3 border-2" :"border-gray-200 placeholder:text-slate-300 text-sm font-poppins  rounded-md p-3 border-2 outline-none"}  `}
                 placeholder="min 8 chars"
                 value={data.password}
                 onChange={handleChange}

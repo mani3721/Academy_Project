@@ -3,6 +3,8 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto&family=Tinos&display=swap');
 
 @layer utilities {
     @variants responsive {
@@ -82,4 +84,16 @@
 .back {
   -webkit-transform: rotateY(-180deg);
           transform: rotateY(-180deg);
+}
+
+.zebra-stripes {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    #e0f4f6 10px,
+    #e9f4f5 20px,
+    #f1f8f9 20px,
+    #f1f8f9 30px
+  );
 }

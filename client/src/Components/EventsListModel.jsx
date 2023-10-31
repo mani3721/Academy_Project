@@ -11,7 +11,6 @@ import { PiStudentFill } from "react-icons/pi";
 import { GrDocumentText } from "react-icons/gr";
 import { useDispatch } from "react-redux";
 import { sendmeetinglink } from "../actions/MeetingAction";
-import EventsModel from "./EventsModel";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaLaptopCode } from "react-icons/fa";
 import { deletebatch } from "../api/addbatchRequest";
@@ -23,9 +22,8 @@ const EventsListModel = ({ setclosemodel, datas,setcall }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [openstudents, setStudents] = useState(false);
-  const [meetingLink, setMeetingLink] = useState(
-    "https://meet.google.com/tih-kfdy-vrk"
-  );
+
+  let meetingLink='https://meet.google.com/tih-kfdy-vrk'
   const [Loading, setLoading] = useState(false);
   const [handleopen, sethandleopen] = useState(false);
 
@@ -42,11 +40,11 @@ const EventsListModel = ({ setclosemodel, datas,setcall }) => {
     return `${date}-${month}-${year}`;
   };
 
-  const totaltime = (time1, time2) => {
-    const timeDifference = Math.abs(time1 - time2);
+  // const totaltime = (time1, time2) => {
+  //   const timeDifference = Math.abs(time1 - time2);
 
-    return timeDifference / 2;
-  };
+  //   return timeDifference / 2;
+  // };
 
   const sendmail = (e) => {
     e.preventDefault();
@@ -62,13 +60,13 @@ const EventsListModel = ({ setclosemodel, datas,setcall }) => {
     return monthDiff + yearDiff * 12;
   }
   
-  function monthDiff(d1, d2) {
-    var months;
-    months = (d2.getFullYear() - d1.getFullYear()) * 12;
-    months -= d1.getMonth()+1;
-    months += d2.getMonth();
-    return months <= 0 ? 0 : months;
-}
+//   function monthDiff(d1, d2) {
+//     var months;
+//     months = (d2.getFullYear() - d1.getFullYear()) * 12;
+//     months -= d1.getMonth()+1;
+//     months += d2.getMonth();
+//     return months <= 0 ? 0 : months;
+// }
 
 const handledeleteBatch= async (id)=>{
     
@@ -240,7 +238,7 @@ const handledeleteBatch= async (id)=>{
                       <div className="flex justify-between items-center">
                         <div className="flex gap-4 items-center">
                           <div className="p-2 cursor-pointer text-sm text-white bg-gray-700 rounded-md bg-clip-padding backdrop-filter font-poppins backdrop-blur-sm bg-opacity-20 border flex gap-1 border-gray-100">
-                            <img width={20} src={meet}></img> Join With Google
+                            <img width={20} src={meet} alt="meet"></img> Join With Google
                             Meet{" "}
                           </div>
 
@@ -278,7 +276,7 @@ const handledeleteBatch= async (id)=>{
                           )}
                           <div className="relative cursor-pointer">
                             {data[0].students.length >= 10 && (
-                              <a
+                              <div
                                 onClick={() => setStudents(true)}
                                 className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800"
                               >
@@ -288,7 +286,7 @@ const handledeleteBatch= async (id)=>{
                                     data[0].students.length
                                   ).length
                                 }
-                              </a>
+                              </div>
                             )}
                           </div>
                         </div>

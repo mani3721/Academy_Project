@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React  from "react";
 import logo from "../assest/logo.png";
 import { MenuItem } from "../utils/data";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -33,6 +33,7 @@ const NavBar = () => {
   return (
    
       <nav>
+     
         <div className="bg-white border-b-2 p-2 px-[3%] border-gray-300 flex justify-between items-center">
           <div className="flex justify-start items-center flex-10 gap-10">
             <Link to="/">

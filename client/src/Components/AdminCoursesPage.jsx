@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import SideBar from "./sideBar";
 import AnimatedPage from "../Container/Framermotion";
 import Card from "./Card";
-import { AiFillAlert, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { courcepublish, fetchAllCourceData } from "../api/CourceRequest";
@@ -12,7 +12,6 @@ import { HiMegaphone } from "react-icons/hi2";
 const AdminCoursesPage = () => {
   const navigate = useNavigate();
   const [selectedID, setSelected] = useState([]);
-  const [value, setValue] = useState('');
   const [getCall, setgetCall]=useState()
   const [Loading, setLoading]=useState(false)
 
@@ -169,7 +168,7 @@ const [selectedCategory, setSelectedCategory]=useState("")
                   {data.map((item) => (
                     <div
                       className={`${
-                        item.status == activeTab || item.activeTap == activeTab ? "block" : "hidden"
+                        item.status === activeTab || item.activeTap === activeTab ? "block" : "hidden"
                       } `}
                     >
                       {" "}
@@ -190,7 +189,7 @@ const [selectedCategory, setSelectedCategory]=useState("")
                   <div className="flex gap-5 items-center">
                     <div
                       className={`${
-                        activeTab == "draft" && selectedID?.length
+                        activeTab === "draft" && selectedID?.length
                           ? "block font-poppins text-[18px]"
                           : "hidden"
                       }`}
@@ -199,7 +198,7 @@ const [selectedCategory, setSelectedCategory]=useState("")
                     </div>
                     <div
                       className={`${
-                        activeTab == "draft" && selectedID?.length
+                        activeTab === "draft" && selectedID?.length
                           ? " font-poppins text-[18px] flex items-center"
                           : "hidden"
                       }`}
@@ -218,7 +217,7 @@ const [selectedCategory, setSelectedCategory]=useState("")
                   <div
                   onClick={handlepublish}
                     className={`${
-                      activeTab == "draft" && selectedID?.length
+                      activeTab === "draft" && selectedID?.length
                         ? "flex items-center gap-2 font-roboto text-[20px] p-2 bg-[#1b66c9] text-white rounded-md cursor-pointer"
                         : "hidden"
                     }`}

@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import AnimatedPage from "../Container/Framermotion";
 import { useDispatch, useSelector } from "react-redux";
 import { StudentData, updatestudent } from "../actions/StudentAction";
-import { getAllStudentData, getOneStudent, updateStudentData } from "../api/StudentRequest";
+import { getOneStudent } from "../api/StudentRequest";
 const initialState = {
   name: "",
   studentid:"",
@@ -46,7 +46,7 @@ const AddStudentDetails = () => {
       data.staff
     ) {
 
-      if (params.id=="Add") {
+      if (params.id==="Add") {
         dispatch(StudentData(data)).then((res) => {
     
         if (res._id) {
@@ -80,7 +80,7 @@ const AddStudentDetails = () => {
   };
 
   useEffect(()=>{
-    if (params.id=="Add") {
+    if (params.id==="Add") {
       
       
     }else{

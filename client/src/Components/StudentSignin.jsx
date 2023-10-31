@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import NavBar from "./NavBar";
-import Login from "./StudentLogin";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../actions/AuthAction";
 

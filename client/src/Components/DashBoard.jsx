@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import logo from "../assest/logo.png";
 import { FiSearch } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
-import { categories } from "../utils/data";
 import AnimatedPage from "../Container/Framermotion";
 import { BiSolidUser } from "react-icons/bi";
-import { FaUserFriends } from "react-icons/fa";
-import { getAllDashBaordData, getAllStudentData } from "../api/StudentRequest";
 import { AiTwotoneFire } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import moment from "moment";
@@ -16,28 +13,20 @@ import { AiOutlineDoubleRight } from "react-icons/ai";
 import { AiOutlineDoubleLeft } from "react-icons/ai";
 import {AiOutlinePlus} from 'react-icons/ai'
 import grow from "../assest/grow.png";
-import down from "../assest/down.png";
 import { CalenderData, deleteDashCard, getDashBaordData } from "../api/DashBoardRequest";
 import {MdDeleteOutline} from 'react-icons/md'
-import { useDispatch, useSelector } from "react-redux";
-import Close from '../assest/close.png'
-import { color } from "framer-motion";
 import {FaUserTie} from 'react-icons/fa'
 import SideBar from "./sideBar";
 import { getAllStaffData } from "../api/StaffRequest";
 import PageFooter from "./PageFooter";
-const isNotActiveStyle =
-  "flex items-center px-2 gap-4 text-gray-500 hover:text-[#6ca1eb]  transition-all duration-200 ease-in-out capitalize";
-const isActiveStyle =
-  "flex items-center px-2 gap-4 font-extrabold  border-[#3657e8]  transition-all duration-200 ease-in-out capitalize";
+import { getAllStudentData } from "../api/StudentRequest";
 
 const DashBoard = () => {
   // const Loading = useSelector((state) => state.StudentReducer.loading);
-  const [isActive, setIsActive] = useState(false);
   const [count, setCount] = useState(0);
 const [Loading, setLoading]=useState(false)
   const navigate = useNavigate();
-  const dispatch= useDispatch()
+
 
   const [studentData, setStudentData] = useState([]);
 
@@ -46,13 +35,11 @@ const [Loading, setLoading]=useState(false)
   const [selectedMonthEvents, setSelectedMonthEvents] = useState([]);
   const [showEvents, setShowEvents] = useState(false);
   const [id, setID]=useState('')
-  const [open, setOpen] = useState(true);
   const [getCall, setGetCall]=useState('')
 const [staffCount, setStaffCount]=useState(0)
  
 
-  const [listCouses, setCourses] = useState([
-  ]);
+
 const [fetcheventscall,setFetchEventsCall]=useState([])
 
 
@@ -72,10 +59,10 @@ const [fetcheventscall,setFetchEventsCall]=useState([])
       setCount(data?.length);
       setStudentData(data);
      
-      let fullstack= data.filter((item)=>{return item.course=="Full Stack Developer"} )
-      let uiux= data.filter((item)=>{return item.course=="UI/UX"} )
-      let front= data.filter((item)=>{return item.course=="Front End Developer"} )
-      let back= data.filter((item)=>{return item.course=="Back End Developer"} )
+      let fullstack= data.filter((item)=>{return item.course==="Full Stack Developer"} )
+      let uiux= data.filter((item)=>{return item.course==="UI/UX"} )
+      let front= data.filter((item)=>{return item.course==="Front End Developer"} )
+      let back= data.filter((item)=>{return item.course==="Back End Developer"} )
     
       const fullper = ((fullstack?.length)/(data?.length))*100
       const uiuxper = ((uiux?.length)/(data?.length))*100
@@ -121,7 +108,7 @@ const [fetcheventscall,setFetchEventsCall]=useState([])
     ])
     const numAscending = [...setRankingData].sort((a, b) => a.count - b.count);
      setRanking(numAscending.reverse())
-      setCourses(data)
+  
     };
 
   
@@ -190,22 +177,19 @@ const [fetcheventscall,setFetchEventsCall]=useState([])
     return weeks;
   };
 
-  const goToCurrentMonthView = () => {
-    const currentMonthView = selectedMonth;
-    setSelectedMonth(moment());
-  };
+  // const goToCurrentMonthView = () => {
+  //   const currentMonthView = selectedMonth;
+  //   setSelectedMonth(moment());
+  // };
 
-  const isActiveCall = () => {
-    setIsActive(!isActive);
-  };
-  const renderTodayLabel = () => {
-    const currentSelectedDay = selectedDay;
-    return (
-      <span className="box today-label" onClick={goToCurrentMonthView}>
-        Today
-      </span>
-    );
-  };
+  // const renderTodayLabel = () => {
+  //   const currentSelectedDay = selectedDay;
+  //   return (
+  //     <span className="box today-label" onClick={goToCurrentMonthView}>
+  //       Today
+  //     </span>
+  //   );
+  // };
 
   const renderMonthLabel = () => {
     const currentMonthView = selectedMonth;
@@ -453,7 +437,7 @@ const handleDelete= async (id)=>{
                             {item.title}
                             <div onClick={()=>handleDelete(item._id)} className="  cursor-pointer rounded-full w-7 h-7 flex items-center justify-center">
                           {
-                            id == item._id && Loading ?   <div
+                            id === item._id && Loading ?   <div
                             class="inline-block  h-5 w-5 animate-spin rounded-full border-2 border-solid border-black border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
                             role="status"
                           ></div> :  <MdDeleteOutline color="#ff051e" fontSize={22}  className="hidden group-hover:block" />

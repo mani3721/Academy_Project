@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AnimatedPage from "../Container/Framermotion";
 import { useDispatch, useSelector } from "react-redux";
-import { StudentData, updatestudent } from "../actions/StudentAction";
-import { getAllStudentData, getOneStudent, updateStudentData } from "../api/StudentRequest";
 import { addStaff, updateStaff } from "../actions/StaffAction";
 import { fetchStaff } from "../api/StaffRequest";
 
@@ -37,7 +35,7 @@ const AddStaff = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
    
-  if (params.id=='add') {
+  if (params.id==='add') {
     dispatch(addStaff(data)).then((res)=>{
       setAxiosErrorMsg(res)
         res._id ? navigate('/category/staff') : navigate('/addstaff/add')
@@ -57,7 +55,7 @@ const AddStaff = () => {
 
 useEffect(()=>{
  const fetchStaffData=async ()=>{
-  if (params.id=="add" ) {
+  if (params.id==="add" ) {
     
   }else{
     const {data}= await fetchStaff(params.id)

@@ -29,7 +29,7 @@ const StudentLogin = () => {
        
      dispatch(logIn(data)).then((res)=>{
    
-        res=="Success Login"? navigate("/studentpage") : setErrorMsg(res.response.data)
+        res==="Success Login"? navigate("/studentpage") : setErrorMsg(res.response.data)
   
      })
      
@@ -89,7 +89,7 @@ const StudentLogin = () => {
                type="password"
                name="password"
                id=""
-               className={`${errorMsg=="Wrong Password" ? "placeholder:text-slate-300 text-sm font-poppins  rounded-md p-3 border-2 border-red-400 outline-none":"placeholder:text-slate-300 text-sm font-poppins  rounded-md p-3 border-2 border-gray-200 outline-none" } `}
+               className={`${errorMsg==="Wrong Password" ? "placeholder:text-slate-300 text-sm font-poppins  rounded-md p-3 border-2 border-red-400 outline-none":"placeholder:text-slate-300 text-sm font-poppins  rounded-md p-3 border-2 border-gray-200 outline-none" } `}
                placeholder="min 8 chars"
                value={data.password}
                onChange={handleChange}
