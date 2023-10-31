@@ -52,7 +52,7 @@ const DayTimelineDemo=({ events, openside, currentDate })=>{
           <div>
           <EventList
                   opensideBar={openside}
-                  events={eventsForSelectedDate.filter((event) => event.room === "Talento")}
+                  events={eventsForSelectedDate.filter((event) => event.room === "Abs")}
                   hour={hour}
                   currentTime={currentTime}
                 />

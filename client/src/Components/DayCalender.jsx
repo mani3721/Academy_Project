@@ -14,6 +14,7 @@ import { deletebatch, fetchAllBatch } from "../api/addbatchRequest";
 import { useNavigate } from "react-router-dom";
 import DayTimelineDemo from "./DayTimelineDemo";
 import class1 from '../assest/class1.png'
+import DayTimeline from "./DayTimeline";
 const DayCalender = ({ currentDate, setGetCall }) => {
   const navigate = useNavigate();
   const [opensidebar, setSidebar] = useState(false);
