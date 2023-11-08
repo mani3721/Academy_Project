@@ -11,11 +11,15 @@ import Week from "./Week";
 import Events from "./Events";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { AiOutlineDoubleLeft } from "react-icons/ai";
-import {AiOutlinePlus} from 'react-icons/ai'
+import { AiOutlinePlus } from "react-icons/ai";
 import grow from "../assest/grow.png";
-import { CalenderData, deleteDashCard, getDashBaordData } from "../api/DashBoardRequest";
-import {MdDeleteOutline} from 'react-icons/md'
-import {FaUserTie} from 'react-icons/fa'
+import {
+  CalenderData,
+  deleteDashCard,
+  getDashBaordData,
+} from "../api/DashBoardRequest";
+import { MdDeleteOutline } from "react-icons/md";
+import { FaUserTie } from "react-icons/fa";
 import SideBar from "./sideBar";
 import { getAllStaffData } from "../api/StaffRequest";
 import PageFooter from "./PageFooter";
@@ -24,9 +28,8 @@ import { getAllStudentData } from "../api/StudentRequest";
 const DashBoard = () => {
   // const Loading = useSelector((state) => state.StudentReducer.loading);
   const [count, setCount] = useState(0);
-const [Loading, setLoading]=useState(false)
+  const [Loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
 
   const [studentData, setStudentData] = useState([]);
 
@@ -34,23 +37,20 @@ const [Loading, setLoading]=useState(false)
   const [selectedDay, setSelectedDay] = useState(moment().startOf("day"));
   const [selectedMonthEvents, setSelectedMonthEvents] = useState([]);
   const [showEvents, setShowEvents] = useState(false);
-  const [id, setID]=useState('')
-  const [getCall, setGetCall]=useState('')
-const [staffCount, setStaffCount]=useState(0)
- 
+  const [id, setID] = useState("");
+  const [getCall, setGetCall] = useState("");
+  const [staffCount, setStaffCount] = useState(0);
 
+  const [fetcheventscall, setFetchEventsCall] = useState([]);
 
-const [fetcheventscall,setFetchEventsCall]=useState([])
-
-
-  const [ranking, setRanking]=useState([])
+  const [ranking, setRanking] = useState([]);
 
   const [data, setData] = useState([
     {
       image: <BiSolidUser />,
       count: "51",
       title: "Total Student",
-    }
+    },
   ]);
 
   useEffect(() => {
@@ -58,82 +58,76 @@ const [fetcheventscall,setFetchEventsCall]=useState([])
       const { data } = await getAllStudentData();
       setCount(data?.length);
       setStudentData(data);
-     
-      let fullstack= data.filter((item)=>{return item.course==="Full Stack Developer"} )
-      let uiux= data.filter((item)=>{return item.course==="UI/UX"} )
-      let front= data.filter((item)=>{return item.course==="Front End Developer"} )
-      let back= data.filter((item)=>{return item.course==="Back End Developer"} )
-    
-      const fullper = ((fullstack?.length)/(data?.length))*100
-      const uiuxper = ((uiux?.length)/(data?.length))*100
-      const frontend = ((front?.length)/(data?.length))*100
-      const backend = ((back?.length)/(data?.length))*100
-     
 
-      const setRankingData=([
-      {
-         id:1,
-         count:fullstack.length,
-         course:"Full Stack Developer",
-         percentage:fullper,
-         color:"#ff7b7b"
+      let fullstack = data.filter((item) => {
+        return item.course === "Full Stack Developer";
+      });
+      let uiux = data.filter((item) => {
+        return item.course === "UI/UX";
+      });
+      let front = data.filter((item) => {
+        return item.course === "Front End Developer";
+      });
+      let back = data.filter((item) => {
+        return item.course === "Back End Developer";
+      });
 
-      },
-      {
-        id:2,
-        count:uiux.length,
-        course:"UI/UX",
-        percentage:uiuxper,
-        color:"#8cd7f5"
+      const fullper = (fullstack?.length / data?.length) * 100;
+      const uiuxper = (uiux?.length / data?.length) * 100;
+      const frontend = (front?.length / data?.length) * 100;
+      const backend = (back?.length / data?.length) * 100;
 
-     },
-     {
-      id:3,
-      count:front.length,
-      course:"Front End Developer",
-      percentage:frontend,
-      color:"#8cd7f5"
-
-   }
-   ,
-     {
-      id:4,
-      count:back.length,
-      course:"Back End Developer",
-      percentage:backend,
-      color:"#a8adff"
-
-   }
-    
-    ])
-    const numAscending = [...setRankingData].sort((a, b) => a.count - b.count);
-     setRanking(numAscending.reverse())
-  
+      const setRankingData = [
+        {
+          id: 1,
+          count: fullstack.length,
+          course: "Full Stack Developer",
+          percentage: fullper,
+          color: "#ff7b7b",
+        },
+        {
+          id: 2,
+          count: uiux.length,
+          course: "UI/UX",
+          percentage: uiuxper,
+          color: "#8cd7f5",
+        },
+        {
+          id: 3,
+          count: front.length,
+          course: "Front End Developer",
+          percentage: frontend,
+          color: "#8cd7f5",
+        },
+        {
+          id: 4,
+          count: back.length,
+          course: "Back End Developer",
+          percentage: backend,
+          color: "#a8adff",
+        },
+      ];
+      const numAscending = [...setRankingData].sort(
+        (a, b) => a.count - b.count
+      );
+      setRanking(numAscending.reverse());
     };
 
-  
+    const getAllStaff = async () => {
+      const { data } = await getAllStaffData();
 
-    const getAllStaff= async ()=>{
-      const {data}= await getAllStaffData()
-  
-      
-  
-      setStaffCount(data?.length)
-     
-     } 
-  
-  
-     getAllStaff()
-     fetcAllStudentData();
+      setStaffCount(data?.length);
+    };
+
+    getAllStaff();
+    fetcAllStudentData();
   }, []);
 
- 
-
-//get card data
+  //get card data
   useEffect(() => {
     const fetcAllDashData = async () => {
       const { data } = await getDashBaordData();
-      setData(data)
+      setData(data);
     };
 
     fetcAllDashData();
@@ -148,8 +142,6 @@ const [fetcheventscall,setFetchEventsCall]=useState([])
   };
 
   const renderWeeks = () => {
-
-
     let weeks = [];
     let done = false;
     let previousCurrentNextView = selectedMonth
@@ -200,14 +192,11 @@ const [fetcheventscall,setFetchEventsCall]=useState([])
     );
   };
   const next = () => {
-   
-
-    setSelectedMonth(selectedMonth.clone().add(1, 'month'));
+    setSelectedMonth(selectedMonth.clone().add(1, "month"));
   };
 
   const previous = () => {
     setSelectedMonth(selectedMonth.clone().subtract(1, "month"));
-
   };
 
   // const removeEvent = (i) => {
@@ -220,7 +209,6 @@ const [fetcheventscall,setFetchEventsCall]=useState([])
   //     if (index != -1) {
   //       let final = monthEvents.splice(index, 1);
 
-      
   //     } else {
   //       alert("No events to remove on this day!");
   //     }
@@ -230,7 +218,6 @@ const [fetcheventscall,setFetchEventsCall]=useState([])
   // };
 
   const handleAdd = () => {
-
     let newEvents = [];
 
     var eventTitle = prompt("Please enter a name for your event: ");
@@ -255,15 +242,12 @@ const [fetcheventscall,setFetchEventsCall]=useState([])
           selectedMonthEvents.push(newEvents[i]);
         }
 
-         CalenderData(newEvent).then((res)=>{
-        
-           setFetchEventsCall(res)
-         })
+        CalenderData(newEvent).then((res) => {
+          setFetchEventsCall(res);
+        });
         setSelectedMonthEvents(selectedMonthEvents);
-     
-        break;
 
-        
+        break;
     }
   };
 
@@ -297,51 +281,46 @@ const [fetcheventscall,setFetchEventsCall]=useState([])
     );
   };
 
-
-//split degits
-function applyCommasForAmount(amount) {
-  if (amount) {
-    amount = amount.toString();
-    if (!amount.includes(',')) {
+  //split degits
+  function applyCommasForAmount(amount) {
+    if (amount) {
       amount = amount.toString();
-      amount = amount.split(',').join('');
-      if (amount.length > 3) {
-        var newAmount = amount.split('');
-        newAmount.splice(-3, 0, ',');
-        amount = newAmount.join('');
-        if (amount.length > 6) {
-          var _newAmount = amount.split('');
-          _newAmount.splice(-6, 0, ',');
-          amount = _newAmount.join('');
+      if (!amount.includes(",")) {
+        amount = amount.toString();
+        amount = amount.split(",").join("");
+        if (amount.length > 3) {
+          var newAmount = amount.split("");
+          newAmount.splice(-3, 0, ",");
+          amount = newAmount.join("");
+          if (amount.length > 6) {
+            var _newAmount = amount.split("");
+            _newAmount.splice(-6, 0, ",");
+            amount = _newAmount.join("");
+          }
+          return amount;
         }
-        return amount;
       }
+      return amount;
     }
     return amount;
   }
-  return amount;
-}
 
-
-const applyPerecentage=(total)=>{
+  const applyPerecentage = (total) => {
     if (total) {
-      let result=(total/100)
-      return result
+      let result = total / 100;
+      return result;
     }
-        
-}
+  };
 
-const handleDelete= async (id)=>{
-  setLoading(true)
-  setID(id)
-  id && await deleteDashCard(id).then((res)=>{
-   
-    setLoading(false)
-    setGetCall(res)
-  })
-
-}
-
+  const handleDelete = async (id) => {
+    setLoading(true);
+    setID(id);
+    id &&
+      (await deleteDashCard(id).then((res) => {
+        setLoading(false);
+        setGetCall(res);
+      }));
+  };
 
   return (
     <>
@@ -377,7 +356,7 @@ const handleDelete= async (id)=>{
             </div>
           </div>
           <div className="flex">
-           <SideBar/>
+            <SideBar />
             {/* bg-[#f6f8fa] */}
             <div className=" flex flex-col gap-4  p-2 w-[80%]">
               <div className="flex">
@@ -385,80 +364,93 @@ const handleDelete= async (id)=>{
                   <div class="flex overflow-x-scroll hide-scroll-bar">
                     <div class="flex flex-nowrap ">
                       <div class=" flex gap-5">
-                      <div class="w-64 justify-between flex  h-[23vh] border-2 border-[#eceef6]  max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                        <div class="w-64 justify-between flex  h-[23vh] border-2 border-[#eceef6] scroll-smooth transition max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl  duration-300 ease-in-out">
                           <div className="p-6 flex justify-between flex-col ">
-                          <div className="flex items-center ">
-                          <FaUserTie style={{color:"blue"}}/>
-                            <div className="flex items-center px-3 gap-2">
-                              <img src={grow} alt="" width={25}  />
-                              <h1 className="font-poppins"> {applyPerecentage(count)}</h1>
+                            <div className="flex items-center ">
+                              <FaUserTie style={{ color: "blue" }} />
+                              <div className="flex items-center px-3 gap-2">
+                                <img src={grow} alt="" width={25} />
+                                <h1 className="font-poppins">
+                                  {" "}
+                                  {applyPerecentage(count)}
+                                </h1>
+                              </div>
                             </div>
-                           </div>
-                           <div className="font-poppins font-extrabold text-[25px]">
-                   {count}
-                           </div>
-                           <div className="font-poppins">
-                         Total Students
-                           </div>
+                            <div className="font-poppins font-extrabold text-[25px]">
+                              {count}
+                            </div>
+                            <div className="font-poppins">Total Students</div>
                           </div>
-                          </div>
-                          <div class="w-64 justify-between flex  h-[23vh] border-2 border-[#eceef6]  max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                        </div>
+                        <div class="w-64 justify-between flex  h-[23vh] border-2 border-[#eceef6]  max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
                           <div className="p-6 flex justify-between flex-col ">
-                          <div className="flex items-center ">
-                          <BiSolidUser style={{color:"blue"}}/>
-                            <div className="flex items-center px-3 gap-2">
-                              <img src={grow} alt="" width={25}  />
-                              <h1 className="font-poppins"> {applyPerecentage(staffCount)}</h1>
+                            <div className="flex items-center ">
+                              <BiSolidUser style={{ color: "blue" }} />
+                              <div className="flex items-center px-3 gap-2">
+                                <img src={grow} alt="" width={25} />
+                                <h1 className="font-poppins">
+                                  {" "}
+                                  {applyPerecentage(staffCount)}
+                                </h1>
+                              </div>
                             </div>
-                           </div>
-                           <div className="font-poppins font-extrabold text-[25px]">
-                   {staffCount}
-                           </div>
-                           <div className="font-poppins">
-                         Total Staffs
-                           </div>
-                          </div>
-                          </div>
-                        {
-                          data.map((item)=>(
-                            <div class="w-64 group justify-between flex  h-[23vh] border-2 border-[#eceef6]  max-w-xs overflow-hidden rounded-xl shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
-                          <div className="w-[100%] p-6 flex justify-between flex-col ">
-                          <div className="flex items-center ">
-                          <BiSolidUser style={{color:"blue"}}/>
-                            <div className="flex items-center px-3 gap-2">
-                              <img src={grow} alt="" width={25}  />
-                              <h1 className="font-poppins"> {applyPerecentage(item.count)}</h1>
+                            <div className="font-poppins font-extrabold text-[25px]">
+                              {staffCount}
                             </div>
-                           </div>
-                           <div className="font-poppins font-extrabold text-[25px]">
-                            {applyCommasForAmount(item.count)}
-                           </div>
-                           <div className="font-poppins flex items-center justify-between">
-                            {item.title}
-                            <div onClick={()=>handleDelete(item._id)} className="  cursor-pointer rounded-full w-7 h-7 flex items-center justify-center">
-                          {
-                            id === item._id && Loading ?   <div
-                            class="inline-block  h-5 w-5 animate-spin rounded-full border-2 border-solid border-black border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                            role="status"
-                          ></div> :  <MdDeleteOutline color="#ff051e" fontSize={22}  className="hidden group-hover:block" />
-                          }
-              
+                            <div className="font-poppins">Total Staffs</div>
+                          </div>
+                        </div>
+                        {data.map((item) => (
+                          <div class="w-64 group justify-between flex  h-[23vh] border-2 border-[#eceef6]  max-w-xs overflow-hidden rounded-xl shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                            <div className="w-[100%] p-6 flex justify-between flex-col ">
+                              <div className="flex items-center ">
+                                <BiSolidUser style={{ color: "blue" }} />
+                                <div className="flex items-center px-3 gap-2">
+                                  <img src={grow} alt="" width={25} />
+                                  <h1 className="font-poppins">
+                                    {" "}
+                                    {applyPerecentage(item.count)}
+                                  </h1>
+                                </div>
+                              </div>
+                              <div className="font-poppins font-extrabold text-[25px]">
+                                {applyCommasForAmount(item.count)}
+                              </div>
+                              <div className="font-poppins flex items-center justify-between">
+                                {item.title}
+                                <div
+                                  onClick={() => handleDelete(item._id)}
+                                  className="  cursor-pointer rounded-full w-7 h-7 flex items-center justify-center"
+                                >
+                                  {id === item._id && Loading ? (
+                                    <div
+                                      class="inline-block  h-5 w-5 animate-spin rounded-full border-2 border-solid border-black border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                                      role="status"
+                                    ></div>
+                                  ) : (
+                                    <MdDeleteOutline
+                                      color="#ff051e"
+                                      fontSize={22}
+                                      className="hidden group-hover:block"
+                                    />
+                                  )}
+                                </div>
+                              </div>
                             </div>
-                           
-                           </div>
                           </div>
-                          </div>
-                          ))
-                        }
-                       
+                        ))}
                       </div>
-                     
                     </div>
                   </div>
                 </div>
-                <div className="bg-[#edf0ff] cursor-pointer  flex justify-center items-center p-1 rounded-xl" onClick={()=>navigate("/dashboard/card")}>
-                  <AiOutlinePlus style={{color:'#3b5be9'}}/>
-                  <button className="font-poppins text-[#3b5be9] px-1" >Add</button>
+                <div
+                  className="bg-[#edf0ff] cursor-pointer  flex justify-center items-center p-1 rounded-xl"
+                  onClick={() => navigate("/dashboard/card")}
+                >
+                  <AiOutlinePlus style={{ color: "#3b5be9" }} />
+                  <button className="font-poppins text-[#3b5be9] px-1">
+                    Add
+                  </button>
                 </div>
               </div>
               <div className="flex">
@@ -474,10 +466,13 @@ const handleDelete= async (id)=>{
                         <BsThreeDots />
                       </div>
                     </div>
-                    {ranking.map((item,i) => (
+                    {ranking.map((item, i) => (
                       <div className="flex justify-between px-5 py-2">
                         <div className="flex gap-2 items-center w-[40%]">
-                          <AiTwotoneFire fontSize={20} style={{color:`${item.color}`}} />{" "}
+                          <AiTwotoneFire
+                            fontSize={20}
+                            style={{ color: `${item.color}` }}
+                          />{" "}
                           <h1 className="font-poppins ">{item.course}</h1>
                         </div>
                         <div>
@@ -485,10 +480,12 @@ const handleDelete= async (id)=>{
                         </div>
                         <div className="w-[40%] flex items-center">
                           <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                            
                             <div
                               className={`text-xs font-mdium text-blue-100 text-center p-1 leading-none rounded-full`}
-                               style={{ width:`${item.percentage}%`, backgroundColor:`${item.color}`}}
+                              style={{
+                                width: `${item.percentage}%`,
+                                backgroundColor: `${item.color}`,
+                              }}
                             ></div>
                           </div>
                         </div>
@@ -546,18 +543,27 @@ const handleDelete= async (id)=>{
                     <section className="flex flex-col justify-start flex-wrap w-[80%] gap-3">
                       <header className="flex justify-between w-[100%]  ">
                         <div>
-                        <div onClick={showCalendar} className="bg-[#edf0ff] cursor-pointer font-poppins text-[#3b5be9] p-2 rounded-md">Back</div>
+                          <div
+                            onClick={showCalendar}
+                            className="bg-[#edf0ff] cursor-pointer font-poppins text-[#3b5be9] p-2 rounded-md"
+                          >
+                            Back
+                          </div>
                         </div>
                         <div className="row title-header">
                           {renderDayLabel()}
                         </div>
                         <div className="row button-container">
-                       
-                          <div onClick={addEvent} className=" bg-[#edf0ff] cursor-pointer font-poppins text-[#3b5be9] p-2 rounded-md">Add Events</div>
+                          <div
+                            onClick={addEvent}
+                            className=" bg-[#edf0ff] cursor-pointer font-poppins text-[#3b5be9] p-2 rounded-md"
+                          >
+                            Add Events
+                          </div>
                         </div>
                       </header>
                       <Events
-                      fetcheventscall={fetcheventscall}
+                        fetcheventscall={fetcheventscall}
                         selectedMonth={selectedMonth}
                         selectedDay={selectedDay}
                         selectedMonthEvents={selectedMonthEvents}
@@ -567,29 +573,34 @@ const handleDelete= async (id)=>{
                   ) : (
                     <>
                       <section className="">
-                      
-                          <div className=" flex justify-between items-center font-poppins">
-                            <div onClick={previous} className="cursor-pointer flex items-center p-2 rounded-md">
-                              <AiOutlineDoubleLeft fontSize={20} />
-                            </div>
-                            <div className=" cursor-pointer font-poppins flex">
-                              {/* {renderTodayLabel()} */}
-                              <div className="px-5">{renderMonthLabel()}</div>
-                            </div>
-                            <div onClick={next} className="cursor-pointer  flex items-center p-2 rounded-md">
-                              <AiOutlineDoubleRight fontSize={20} />
-                            </div>
+                        <div className=" flex justify-between items-center font-poppins">
+                          <div
+                            onClick={previous}
+                            className="cursor-pointer flex items-center p-2 rounded-md"
+                          >
+                            <AiOutlineDoubleLeft fontSize={20} />
                           </div>
-                          <div className="row days-header font-bold font-poppins py-2">
-                            <span className="box day-name px-5 ">Mon</span>
-                            <span className="box day-name px-5">Tue</span>
-                            <span className="box day-name px-5">Wed</span>
-                            <span className="box day-name px-5">Thu</span>
-                            <span className="box day-name px-5">Fri</span>
-                            <span className="box day-name px-5">Sat</span>
-                            <span className="box day-name px-5">Sun</span>
+                          <div className=" cursor-pointer font-poppins flex">
+                            {/* {renderTodayLabel()} */}
+                            <div className="px-5">{renderMonthLabel()}</div>
                           </div>
-                  
+                          <div
+                            onClick={next}
+                            className="cursor-pointer  flex items-center p-2 rounded-md"
+                          >
+                            <AiOutlineDoubleRight fontSize={20} />
+                          </div>
+                        </div>
+                        <div className="row days-header font-bold font-poppins py-2">
+                          <span className="box day-name px-5 ">Mon</span>
+                          <span className="box day-name px-5">Tue</span>
+                          <span className="box day-name px-5">Wed</span>
+                          <span className="box day-name px-5">Thu</span>
+                          <span className="box day-name px-5">Fri</span>
+                          <span className="box day-name px-5">Sat</span>
+                          <span className="box day-name px-5">Sun</span>
+                        </div>
+
                         <div className="days-containe  ">{renderWeeks()}</div>
                       </section>
                     </>
@@ -597,11 +608,7 @@ const handleDelete= async (id)=>{
                 </div>
               </div>
             </div>
-          
           </div>
-          <div>
-             <PageFooter/>
-            </div>
         </div>
       </AnimatedPage>
     </>

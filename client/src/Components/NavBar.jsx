@@ -49,12 +49,12 @@ const NavBar = () => {
           </div>
           <div className="flex justify-end text-white gap-2 ">
             <Link to={`/adminlogin`}>
-              <button className="border-[#163b91] border-2 text-blue-700 transition-all ease-out rounded-lg px-4 py-3 text-[14px] font-medium font-poppins">
+              <button className="border-[#163b91] border-2 text-blue-700 transition-all ease-out rounded-lg lg:px-4 lg:py-3 lg:text-[14px] font-medium font-poppins">
                 Admin Login
               </button>
             </Link>
             <Link to={`/login`}>
-              <button className="bg-[#163b91] hover:bg-blue-800 transition-all ease-out rounded-lg px-4 py-3.5 text-[14px] font-medium font-poppins">
+              <button className="bg-[#163b91] hover:bg-blue-800 transition-all ease-out rounded-lg lg:px-4 lg:py-3.5 lg:text-[14px] font-medium font-poppins">
                 Student Login
               </button>
             </Link>

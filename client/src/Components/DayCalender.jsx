@@ -210,13 +210,13 @@ const DayCalender = ({ currentDate, setGetCall }) => {
 
   return (
    <>
-
-   <div className="px-5 flex  ">
+   <div>
+   <div className="px-5 flex ">
     <div className="flex gap-1 items-center">
       <AiOutlineFieldTime fontSize={25} color="blue"/>
     <h2 className="text-[#071232] font-roboto font-bold text-[20px]">Time</h2>
     </div>
-   <div className="w-full gap-40 border-2 flex justify-evenly border-blue-800">
+   <div className="w-full  border-2 flex justify-around border-blue-800 ">
    <div className="flex gap-2 items-center">
     <img src={class1} alt="class" width={20} height={20} className="" />
     <h2 className="text-[#071232] font-roboto text-[20px]  font-bold ">Talento</h2>
@@ -229,7 +229,7 @@ const DayCalender = ({ currentDate, setGetCall }) => {
     
    </div>
    </div>
-    <div className="border-2 border-yellow-500  flex max-h-[72vh] justify-between overflow-auto">
+    <div className="border-2 border-yellow-500 w-[95%] flex max-h-[65vh] justify-between overflow-auto">
       {/* <DayTimeline
         openside={setOpenSidebar}
         events={events}
@@ -410,6 +410,8 @@ const DayCalender = ({ currentDate, setGetCall }) => {
         </motion.div>
       )}
     </div>
+   </div>
+
    </>
   );
 };

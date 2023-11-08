@@ -135,15 +135,13 @@ function formatDates(inputDate) {
   return (
     <>
       <AnimatedPage>
-        <div>
+        <div className="">
           <div>
             <NavBar />
-
-             
           </div>
           <div className="flex">
                  {openModel && <EventsModel events={events} setGetCall={(e)=>setGetCalls(e)}  setclosemodel={()=>setOpenModel(false)}/>}
-            <div className="py-8">
+            <div className="py-5">
               <SideBar />
             </div>
            <div className="w-[84%]">
@@ -199,7 +197,7 @@ function formatDates(inputDate) {
                 </div>
               </div>
             </div>
-            <div className="w-full  ">
+            <div className="w-full   ">
               {active ==="Week" ?  <AnimatedPage> <div className=""> <Month setOpenCal={()=>setGetCalls(!getCall)} data={dataa} month={currenMonth} getmodeldata={setgetmodeldata}/></div> </AnimatedPage>   : <AnimatedPage> <DayCalender currentDate={currentDate} setGetCall={(e)=>setGetCalls(e)}/></AnimatedPage>  }
             
             </div>
