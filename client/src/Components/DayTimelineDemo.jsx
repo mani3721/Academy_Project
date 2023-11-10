@@ -35,7 +35,7 @@ const DayTimelineDemo = ({ events, openside, currentDate }) => {
     return ts;
   }
   return (
-    <div className=" border-2 w-full border-red-600 px-5">
+    <div className="w-full  px-5">
       {hours.map((hour) => (
         <div
           key={hour}

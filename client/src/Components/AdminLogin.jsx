@@ -23,20 +23,26 @@ const AdminLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(adminLogin(data)).then((res) => {
-      if (res === "Success Login") {
-        navigate("/category/dashboard");
-      } else {
-        setErrorMsg(res?.response?.data);
-      }
-    });
+    if (data.email && data.password) {
+      dispatch(adminLogin(data)).then((res) => {
+        if (res === "Success Login") {
+          navigate("/category/dashboard");
+        } else {
+          setErrorMsg(res?.response?.data);
+        }
+      });
+    }else{
+     
+      // setBorder(da)
+
+    }
   };
 
   return (
     <div className="h-screen bg-[#b8bdc9] flex flex-col">
       <NavBar />
       <div className=" flex justify-center items-center h-screen ">
-        <div className="bg-[#ffffff] justify-center rounded-2xl flex 2xl:w-[30%] xl:w-[30%] lg:w-[30%] w-[90%] ">
+        <div className="bg-[#ffffff] justify-center rounded-2xl p-5 flex 2xl:w-[30%] xl:w-[30%] lg:w-[30%] w-[90%] ">
           <div className="  flex justify-center items-center   flex-col  p-5 w-[85%]  ">
             <div className="h-full flex flex-col gap-10 justify-center w-full rounded-2xl">
               {errorMsg && (
@@ -62,7 +68,7 @@ const AdminLogin = () => {
                 </div>
               )}
 
-              <div className="flex justify-between">
+              {/* <div className="flex justify-between">
                 <button
                   className={`${
                     activeTab === "Admin"
@@ -83,7 +89,7 @@ const AdminLogin = () => {
                 >
                   Staff
                 </button>
-              </div>
+              </div> */}
               <h1 className="text-[30px] font-poppins font-medium ">
                 {activeTab} Login
               </h1>

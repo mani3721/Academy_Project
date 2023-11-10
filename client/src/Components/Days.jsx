@@ -176,7 +176,7 @@ const checkdatesss = (event) => {
               onClick={() => setGetmodeldata(evet, true)}
               className={`${
                 ["Sat", "Sun"].includes(days.format("ddd")) ? "bg-[#fdeeea] border-[#f29980] border-l-4  text-[#ee734f]" : "border-l-4 border-[#24bcc9]"
-              } w-[90%] bg-[#eeebfa] shadow-md  text-[#7557d4]   ${checkdatesss(evet.dates)[days.format("DD-MM-YY")] }   `}
+              } w-[90%] ${evet.room==="Talento" && 'bg-[#eeebfa]'} ${evet.room==='Abs' && 'bg-[#fdeeea] text-[#f07f5c]'}  shadow-md  text-[#7557d4]   ${checkdatesss(evet.dates)[days.format("DD-MM-YY")] }   `}
             >
     
               {/* {

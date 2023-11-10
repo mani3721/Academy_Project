@@ -95,7 +95,7 @@ const handledeleteBatch= async (id)=>{
   return (
     <>
       <div className=" perspective h-screen w-full gap-6 bg-gray-400 backdrop-filter backdrop-blur-sm bg-opacity-40 fixed z-50 left-0 top-0 flex justify-center items-center">
-        <div className="page bg-[#ffffff] rounded-3xl w-[40%] h-[85vh]">
+        <div className="page bg-[#ffffff] rounded-3xl w-[40%] h-[87vh]">
           <div className="bg-[#0d817b] rounded-3xl h-full">
             <div className="p-6">
               <div className="border-b border-opacity-5 p-1 flex justify-between">
@@ -161,8 +161,8 @@ const handledeleteBatch= async (id)=>{
           {/* <EventsModel/> */}
         </div>
         {handleopen && (
-          <div className=" bg-[#ffffff] rounded-3xl w-[40%] h-[85vh]">
-            <div className="bg-[#0d817b] rounded-t-3xl h-[55vh]">
+          <div className=" bg-[#ffffff] rounded-3xl w-[40%] h-[87vh]">
+            <div className="bg-[#0d817b] rounded-t-3xl h-[57vh]">
               <div className="p-6">
                 <div className="border-b border-opacity-5 p-1 flex justify-between">
                   <div>
